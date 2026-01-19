@@ -15,7 +15,8 @@
         </div>
     </section>
 
-    <section class="gallery-one" style="padding-bottom: 60px;"> <div class="auto-container">
+    <section class="gallery-one" style="padding-bottom: 60px;"> 
+        <div class="auto-container">
             
             <div class="sec-title centered">
                 <div class="button-group" style="margin-bottom: 50px;">
@@ -45,15 +46,9 @@
                     <div class="gallery-block_one-inner wow fadeInLeft" data-wow-delay="150ms" data-wow-duration="1500ms">
                         <div class="gallery-block_one-image">
                             {% if item.image %}
-                            <img src="{{ item.image.url }}" alt="{{ item.title }}" style="height: 300px; width: 100%; object-fit: cover; border-radius: 10px;" />
-                            
-                            <div class="overlay-box">
-                                <a href="{{ item.image.url }}" class="lightbox-image" data-fancybox="gallery" data-caption="{{ item.title }}">
-                                    <span class="icon fa fa-expand"></span>
-                                </a>
-                                <h4>{{ item.title }}</h4>
-                                <div class="category">{{ item.category.name }}</div>
-                            </div>
+                            <a href="{{ item.image.url }}" class="lightbox-image" data-fancybox="gallery" data-caption="{{ item.title }}" style="display: block;">
+                                <img src="{{ item.image.url }}" alt="{{ item.title }}" style="height: 300px; width: 100%; object-fit: cover; border-radius: 10px; display: block;" />
+                            </a>
                             {% endif %}
                         </div>
                     </div>
@@ -91,12 +86,12 @@
         </div>
     </section>
 
-    <section class="cta-two">
+    <section class="cta-two" style="background-color: var(--main-color);">
         <div class="auto-container">
             <div class="inner-container d-flex justify-content-between align-items-center flex-wrap">
                 <div class="cta-two_bg" style="background-image:url({% static 'assets/images/background/cta-one_bg.png' %})"></div>
-                <div class="cta-two_icon flaticon-nabawi-mosque"></div>
-                <h3 class="cta-two_heading">Proud to be serving thousands of Muslim <br> Families around the World</h3>
+                <div class="cta-two_icon flaticon-nabawi-mosque" style="color: #ffffff;"></div>
+                <h3 class="cta-two_heading" style="color: #ffffff;">Proud to be serving thousands of Muslim <br> Families around the World</h3>
                 <div class="cta-two_button">
                     <a href="{% url 'admin_panel:contact' %}" class="theme-btn btn-style-three">
                         <span class="btn-wrap">

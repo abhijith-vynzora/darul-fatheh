@@ -105,7 +105,7 @@ try:
     from .models import Donation
     @admin.register(Donation)
     class DonationAdmin(admin.ModelAdmin):
-        list_display = ['donor_name', 'amount', 'purpose', 'payment_method', 'donated_at']
+        list_display = ['donor_name', 'amount',  'payment_method', 'donated_at']
         search_fields = ['donor_name', 'email', 'transaction_id']
         list_filter = ['payment_method', 'donated_at']
         ordering = ['-donated_at']
@@ -114,7 +114,7 @@ except ImportError:
         from .models import Donations
         @admin.register(Donations)
         class DonationsAdmin(admin.ModelAdmin):
-            list_display = ['donor_name', 'amount', 'purpose', 'payment_method', 'donated_at']
+            list_display = ['donor_name', 'amount', 'payment_method', 'donated_at']
             search_fields = ['donor_name', 'email', 'transaction_id']
             list_filter = ['payment_method', 'donated_at']
             ordering = ['-donated_at']

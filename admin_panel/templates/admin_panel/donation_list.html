@@ -25,7 +25,7 @@
                 <tr>
                     <th>Donor Name</th>
                     <th>Amount</th>
-                    <th>Purpose</th>
+                    {% comment %} <th>Purpose</th> {% endcomment %}
                     <th>Payment Method</th>
                     <th>Transaction ID</th>
                     <th>Date</th>
@@ -37,7 +37,7 @@
                 <tr>
                     <td>{{ donation.donor_name }}</td>
                     <td><strong>{{ donation.amount }}</strong></td>
-                    <td>{{ donation.purpose }}</td>
+                    {% comment %} <td>{{ donation.purpose }}</td> {% endcomment %}
                     <td><span class="badge bg-info">{{ donation.payment_method }}</span></td>
                     <td>{{ donation.transaction_id|default:"-" }}</td>
                     <td>{{ donation.donated_at|date:"M d, Y" }}</td>
@@ -71,10 +71,10 @@
                                             <label class="form-label">Amount *</label>
                                             <input type="number" step="0.01" name="amount" class="form-control" value="{{ donation.amount }}" required>
                                         </div>
-                                        <div class="col-md-6 mb-3">
+                                        {% comment %} <div class="col-md-6 mb-3">
                                             <label class="form-label">Purpose *</label>
                                             <input type="text" name="purpose" class="form-control" value="{{ donation.purpose }}" required>
-                                        </div>
+                                        </div> {% endcomment %}
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Payment Method *</label>
                                             <input type="text" name="payment_method" class="form-control" value="{{ donation.payment_method }}" required>
@@ -190,7 +190,7 @@
             rows.forEach(row => {
                 const cells = [
                     row.querySelector("td:nth-child(1)"), // Donor
-                    row.querySelector("td:nth-child(3)"), // Purpose
+                    {% comment %} row.querySelector("td:nth-child(3)"), // Purpose {% endcomment %}
                     row.querySelector("td:nth-child(4)"), // Payment
                     row.querySelector("td:nth-child(5)")  // Transaction ID
                 ];

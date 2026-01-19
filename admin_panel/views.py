@@ -460,7 +460,7 @@ def donation_create(request):
     if request.method == 'POST':
         donor_name = request.POST.get('donor_name')
         amount = request.POST.get('amount')
-        purpose = request.POST.get('purpose')
+        # purpose = request.POST.get('purpose')
         payment_method = request.POST.get('payment_method')
         transaction_id = request.POST.get('transaction_id')
         email = request.POST.get('email')
@@ -470,7 +470,7 @@ def donation_create(request):
         DonationDetails.objects.create(
             donor_name=donor_name,
             amount=amount,
-            purpose=purpose,
+            # purpose=purpose,
             payment_method=payment_method,
             transaction_id=transaction_id,
             email=email,
@@ -489,7 +489,7 @@ def donation_edit(request, pk):
     if request.method == 'POST':
         donation.donor_name = request.POST.get('donor_name')
         donation.amount = request.POST.get('amount')
-        donation.purpose = request.POST.get('purpose')
+        # donation.purpose = request.POST.get('purpose')
         donation.payment_method = request.POST.get('payment_method')
         donation.transaction_id = request.POST.get('transaction_id')
         donation.email = request.POST.get('email')

@@ -677,11 +677,11 @@
                                     Gallery Images
                                 </a>
                             </li>
-                            <li>
+                            {% comment %} <li>
                                 <a href="{% url 'admin_panel:add_category' %}" class="{% if '/add_category/' in request.path %}active{% endif %}">
                                      Add Gallery Category
                                 </a>
-                            </li>
+                            </li> {% endcomment %}
                             <li>
                                 <a href="{% url "admin_panel:category_list" %}" class="{% if '/category_list/' in request.path %}active{% endif %}">
                                     Gallery Categories

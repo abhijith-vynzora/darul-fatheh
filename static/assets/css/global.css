@@ -52,72 +52,74 @@
 
  ***/
 
-.theme_color{
-	color:var(--main-color);
+ .theme_color{
+    color:var(--main-color);
 }
 
 /* Theme Color */
 
 :root {
-
-	/* Primary Brand Color: Navy Blue (replaces Green) */
-    --main-color: rgb(9, 27, 65);
-    --main-color-rgb: 9, 27, 65;
+    /* Hex: #1D4E3A -> RGB: 29, 78, 58 (Dark Forest Green) */
+    --main-color: rgb(29, 78, 58);
+    --main-color-rgb: 29, 78, 58;
     
-    /* Secondary Accent: Deep Red (replaces Yellow) */
-    --color-two: rgb(197, 31, 42);
-    --color-two-rgb: 149, 48, 48;
+    /* Hex: #B1882E -> RGB: 177, 136, 46 (Muted Gold) */
+    --color-two:   rgb(177, 136, 46);
+    --color-two-rgb: 177, 136, 46;
 
-    /* Text/Dark Elements: Navy Blue (replaces Soft Black) */
-    --color-three: rgb(9, 27, 65);
-    --color-three-rgb: 9, 27, 65;
+    /* Hex: #22543D -> RGB: 34, 84, 61 (Button Green) */
+    /* FIXED SYNTAX ERROR HERE */
+    --color-three:  rgb(34, 84, 61);
+    --color-three-rgb: 34, 84, 61;
 
-    /* Light Grey Backgrounds */
-    --color-four: rgb(231, 233, 232);
-    --color-four-rgb: 231, 233, 232;
+    /* NEW: Milky White (Brighter, cleaner, pops against pure white) */
+    /* RGB: 250, 248, 242 */
+    --color-four: rgb(250, 248, 242);
+    --color-four-rgb: 250, 248, 242;
 
-    /* Text Colors: Navy Blue */
-    --color-five: rgb(9, 27, 65);
-    --color-five-rgb: 9, 27, 65;
 
-    --color-six: rgb(9, 27, 65);
-    --color-six-rgb: 9, 27, 65;
+    /* Headings & Dark Text -> Main Green */
+    --color-five: rgb(29, 78, 58);
+    --color-five-rgb: 29, 78, 58;
 
-    /* Highlights: Deep Red */
-    --color-seven: rgb(197, 31, 42);
-    --color-seven-rgb: 149, 48, 48;
+    --color-six: rgb(29, 78, 58);
+    --color-six-rgb: 29, 78, 58;
 
-    /* Secondary Backgrounds: Cream */
-    --color-eight: rgb(252, 246, 234);
-    --color-eight-rgb: 252, 246, 234;
+    /* Highlights & Icons -> Gold */
+    --color-seven: rgb(177, 136, 46);
+    --color-seven-rgb: 177, 136, 46;
 
-    /* Darker Accents: Navy Blue */
-    --color-nine: rgb(9, 27, 65);
-    --color-nine-rgb: 9, 27, 65;
+    /* Secondary Backgrounds -> Milky White */
+    --color-eight: rgb(250, 248, 242);
+    --color-eight-rgb: 250, 248, 242;
 
-    --color-ten: rgb(9, 27, 65);
-    --color-ten-rgb: 9, 27, 65;
+    /* Darker Accents -> Main Green */
+    --color-nine: rgb(29, 78, 58);
+    --color-nine-rgb: 29, 78, 58;
+
+    --color-ten: rgb(29, 78, 58);
+    --color-ten-rgb: 29, 78, 58;
     
-    --color-eleven: rgb(9, 27, 65);
-    --color-eleven-rgb: 9, 27, 65;
+    --color-eleven: rgb(29, 78, 58);
+    --color-eleven-rgb: 29, 78, 58;
 
-    --color-twelve: rgb(9, 27, 65);
-    --color-twelve-rgb: 9, 27, 65;
+    --color-twelve: rgb(29, 78, 58);
+    --color-twelve-rgb: 29, 78, 58;
 
-    /* Text Grey: Navy Blue (for high contrast) */
-    --color-thirteen: rgb(9, 27, 65);
-    --color-thirteen-rgb: 9, 27, 65;
+    /* Text Grey -> Dark Grey (For better readability) */
+    --color-thirteen: rgb(55, 65, 81);
+    --color-thirteen-rgb: 55, 65, 81;
 
-    /* Light Greys */
+    /* Light Greys/Borders */
     --color-fourteen: rgb(231, 233, 232);
     --color-fourteen-rgb: 231, 233, 232;
 
-    --color-fifteen: rgb(9, 27, 65);
-    --color-fifteen-rgb: 9, 27, 65;
+    --color-fifteen: rgb(29, 78, 58);
+    --color-fifteen-rgb: 29, 78, 58;
 
-    /* Backgrounds: Cream */
-    --color-sixteen: rgb(252, 246, 234);
-    --color-sixteen-rgb: 252, 246, 234;
+    /* Backgrounds: Milky White */
+    --color-sixteen: rgb(250, 248, 242);
+    --color-sixteen-rgb: 250, 248, 242;
 
     /* Backgrounds: Light Grey */
     --color-seventeen: rgb(231, 233, 232);
@@ -126,9 +128,9 @@
     --color-eighteen: rgb(231, 233, 232);
     --color-eighteen-rgb: 231, 233, 232;
 
-    /* Backgrounds: Cream */
-    --color-nineteen: rgb(252, 246, 234);
-    --color-nineteen-rgb: 252, 246, 234;
+    /* Backgrounds: Milky White */
+    --color-nineteen: rgb(250, 248, 242);
+    --color-nineteen-rgb: 250, 248, 242;
 
     /* Backgrounds: Light Grey */
     --color-twenty: rgb(231, 233, 232);
@@ -140,16 +142,16 @@
     --color-twentytwo: rgb(231, 233, 232);
     --color-twentytwo-rgb: 231, 233, 232;
 
-    /* Dark Greys: Navy Blue */
-    --color-twentythree: rgb(9, 27, 65);
-    --color-twentythree-rgb: 9, 27, 65;
+    /* Dark Greys -> Main Green */
+    --color-twentythree: rgb(29, 78, 58);
+    --color-twentythree-rgb: 29, 78, 58;
 
-    --color-twentyfour: rgb(9, 27, 65);
-    --color-twentyfour-rgb: 9, 27, 65;
+    --color-twentyfour: rgb(29, 78, 58);
+    --color-twentyfour-rgb: 29, 78, 58;
 
-    /* Accents: Deep Red */
-    --color-twentyfive: rgb(197, 31, 42);
-    --color-twentyfive-rgb: 149, 48, 48;
+    /* Accents -> Gold */
+    --color-twentyfive: rgb(177, 136, 46);
+    --color-twentyfive-rgb: 177, 136, 46;
     
     /* Light Grey */
     --color-twentysix: rgb(231, 233, 232);
@@ -158,67 +160,67 @@
     --color-twentyseven: rgb(231, 233, 232);
     --color-twentyseven-rgb: 231, 233, 232;
 
-    /* Dark Elements: Navy Blue */
-    --color-twentyeight: rgb(9, 27, 65);
-    --color-twentyeight-rgb: 9, 27, 65;
+    /* Dark Elements -> Main Green */
+    --color-twentyeight: rgb(29, 78, 58);
+    --color-twentyeight-rgb: 29, 78, 58;
 
-    --color-twentynine: rgb(9, 27, 65);
-    --color-twentynine-rgb: 9, 27, 65;
+    --color-twentynine: rgb(29, 78, 58);
+    --color-twentynine-rgb: 29, 78, 58;
 
-    --color-thirty: rgb(9, 27, 65);
-    --color-thirty-rgb: 9, 27, 65;
+    --color-thirty: rgb(29, 78, 58);
+    --color-thirty-rgb: 29, 78, 58;
     
-    --color-thirtyone: rgb(9, 27, 65);
-    --color-thirtyone-rgb: 9, 27, 65;
+    --color-thirtyone: rgb(29, 78, 58);
+    --color-thirtyone-rgb: 29, 78, 58;
 
-    /* Home Two Colors: Mapped to Navy */
-    --color-thirtytwo: rgb(9, 27, 65);
-    --color-thirtytwo-rgb: 9, 27, 65;
+    /* Home Two Colors -> Mapped to Green */
+    --color-thirtytwo: rgb(29, 78, 58);
+    --color-thirtytwo-rgb: 29, 78, 58;
 
-    --color-thirtythree: rgb(9, 27, 65);
-    --color-thirtythree-rgb: 9, 27, 65;
+    --color-thirtythree: rgb(29, 78, 58);
+    --color-thirtythree-rgb: 29, 78, 58;
 
-    /* Backgrounds: Cream */
-    --color-thirtyfour: rgb(252, 246, 234);
-    --color-thirtyfour-rgb: 252, 246, 234;
+    /* Backgrounds: Milky White */
+    --color-thirtyfour: rgb(250, 248, 242);
+    --color-thirtyfour-rgb: 250, 248, 242;
 
-    /* Dark Grey: Navy */
-    --color-thirtyfive: rgb(9, 27, 65);
-    --color-thirtyfive-rgb: 9, 27, 65;
+    /* Dark Grey -> Green */
+    --color-thirtyfive: rgb(29, 78, 58);
+    --color-thirtyfive-rgb: 29, 78, 58;
 
-    --color-thirtysix: rgb(9, 27, 65);
-    --color-thirtysix-rgb: 9, 27, 65;
+    --color-thirtysix: rgb(29, 78, 58);
+    --color-thirtysix-rgb: 29, 78, 58;
 
-    --color-thirtyseven: rgb(9, 27, 65);
-    --color-thirtyseven-rgb: 9, 27, 65;
+    --color-thirtyseven: rgb(29, 78, 58);
+    --color-thirtyseven-rgb: 29, 78, 58;
 
-    /* Backgrounds: Cream */
-    --color-thirtyeight: rgb(252, 246, 234);
-    --color-thirtyeight-rgb: 252, 246, 234;
+    /* Backgrounds: Milky White */
+    --color-thirtyeight: rgb(250, 248, 242);
+    --color-thirtyeight-rgb: 250, 248, 242;
     
-    /* Dark Grey: Navy */
-    --color-thirtynine: rgb(9, 27, 65);
-    --color-thirtynine-rgb: 9, 27, 65;
+    /* Dark Grey -> Green */
+    --color-thirtynine: rgb(29, 78, 58);
+    --color-thirtynine-rgb: 29, 78, 58;
 
-    /* Backgrounds: Cream */
-    --color-fourty: rgb(252, 246, 234);
-    --color-fourty-rgb: 252, 246, 234;
+    /* Backgrounds: Milky White */
+    --color-fourty: rgb(250, 248, 242);
+    --color-fourty-rgb: 250, 248, 242;
 
-    /* Grey: Navy */
-    --color-fourtyone: rgb(9, 27, 65);
-    --color-fourtyone-rgb: 9, 27, 65;
+    /* Grey -> Green */
+    --color-fourtyone: rgb(29, 78, 58);
+    --color-fourtyone-rgb: 29, 78, 58;
 
-    /* Backgrounds: Cream */
-    --color-fourtytwo: rgb(252, 246, 234);
-    --color-fourtytwo-rgb: 252, 246, 234;
+    /* Backgrounds: Milky White */
+    --color-fourtytwo: rgb(250, 248, 242);
+    --color-fourtytwo-rgb: 250, 248, 242;
 
     /* Grey: Light Grey */
     --color-fourtythree: rgb(231, 233, 232);
     --color-fourtythree-rgb: 231, 233, 232;
 
-    /* Accents: Deep Red */
-    --color-fourtyfour: rgb(197, 31, 42);
-    --color-fourtyfour-rgb: 149, 48, 48;
+    /* Accents -> Gold */
+    --color-fourtyfour: rgb(177, 136, 46);
+    --color-fourtyfour-rgb: 177, 136, 46;
 
     /* Backgrounds: Light Grey */
     --color-fourtyfive: rgb(231, 233, 232);
@@ -227,40 +229,40 @@
     --color-fourtysix: rgb(231, 233, 232);
     --color-fourtysix-rgb: 231, 233, 232;
 
-    /* Backgrounds: Cream */
-    --color-fourtyseven: rgb(252, 246, 234);
-    --color-fourtyseven-rgb: 252, 246, 234;
+    /* Backgrounds: Milky White */
+    --color-fourtyseven: rgb(250, 248, 242);
+    --color-fourtyseven-rgb: 250, 248, 242;
 
-    /* Dark Grey: Navy */
-    --color-fourtyeight: rgb(9, 27, 65);
-    --color-fourtyeight-rgb: 9, 27, 65;
+    /* Dark Grey -> Green */
+    --color-fourtyeight: rgb(29, 78, 58);
+    --color-fourtyeight-rgb: 29, 78, 58;
 
     /* Light Grey */
     --color-fourtynine: rgb(231, 233, 232);
     --color-fourtynine-rgb: 231, 233, 232;
 
-    /* Backgrounds: Cream */
-    --color-fifty: rgb(252, 246, 234);
-    --color-fifty-rgb: 252, 246, 234;
+    /* Backgrounds: Milky White */
+    --color-fifty: rgb(250, 248, 242);
+    --color-fifty-rgb: 250, 248, 242;
 
     /* Light Grey */
     --color-fiftyone: rgb(231, 233, 232);
     --color-fiftyone-rgb: 231, 233, 232;
 
-    /* Dark Grey: Navy */
-    --color-fiftytwo: rgb(9, 27, 65);
-    --color-fiftytwo-rgb: 9, 27, 65;
+    /* Dark Grey -> Green */
+    --color-fiftytwo: rgb(29, 78, 58);
+    --color-fiftytwo-rgb: 29, 78, 58;
 
     /* Light Grey */
     --color-fiftythree: rgb(231, 233, 232);
     --color-fiftythree-rgb: 231, 233, 232;
     
-    /* Dark Grey: Navy */
-    --color-fiftyfour: rgb(9, 27, 65);
-    --color-fiftyfour-rgb: 9, 27, 65;
+    /* Dark Grey -> Green */
+    --color-fiftyfour: rgb(29, 78, 58);
+    --color-fiftyfour-rgb: 29, 78, 58;
 
-    --color-fiftyfive: rgb(9, 27, 65);
-    --color-fiftyfive-rgb: 9, 27, 65;
+    --color-fiftyfive: rgb(29, 78, 58);
+    --color-fiftyfive-rgb: 29, 78, 58;
 
     /* Light Grey */
     --color-fiftysix: rgb(231, 233, 232);
@@ -269,16 +271,16 @@
     --color-fiftyseven: rgb(231, 233, 232);
     --color-fiftyseven-rgb: 231, 233, 232;
 
-    /* Backgrounds: Cream */
-    --color-fiftyeight: rgb(252, 246, 234);
-    --color-fiftyeight-rgb: 252, 246, 234;
+    /* Backgrounds: Milky White */
+    --color-fiftyeight: rgb(250, 248, 242);
+    --color-fiftyeight-rgb: 250, 248, 242;
 
-    /* Dark Grey: Navy */
-    --color-fiftynine: rgb(9, 27, 65);
-    --color-fiftynine-rgb: 9, 27, 65;
+    /* Dark Grey -> Green */
+    --color-fiftynine: rgb(29, 78, 58);
+    --color-fiftynine-rgb: 29, 78, 58;
 
-    --color-sixty: rgb(9, 27, 65);
-    --color-sixty-rgb: 9, 27, 65;
+    --color-sixty: rgb(29, 78, 58);
+    --color-sixty-rgb: 29, 78, 58;
     
     /* Standard Colors (Kept Pure) */
     --white-color: rgb(255,255,255);
@@ -286,10 +288,11 @@
 
     --black-color: rgb(0,0,0);
     --black-color-rgb: 0,0,0;
-		
 
-	/* Fonts */
-	--font-family-Lexend: "Outfit", sans-serif;
+    
+    /* Font Family Update */
+    --font-family-sans: 'Montserrat', sans-serif;
+
 
 	
 /* Heading Fonts */
@@ -933,7 +936,7 @@ img{
 	color: var(--white-color);
 	font-size: var(--font-14);
 	text-transform: capitalize;
-	background-color: var(--color-two);
+	background-color: var(--main-color);
 }
 
 .btn-style-one:before{
@@ -949,7 +952,7 @@ img{
 	transform: translateX(-50%);
 	border-radius: 50%;
 	z-index: 1;
-	background-color: var(--color-three);
+	background-color: var(--color-two);
 }
 
 .btn-style-one:hover:before{
@@ -1021,7 +1024,7 @@ img{
 	color: var(--color-six); 
 	font-size: var(--font-14);
 	text-transform: capitalize;
-	background-color: var(--color-seven);
+	background-color: var(--main-color);
 }
 
 .btn-style-two:before{
@@ -1037,7 +1040,7 @@ img{
 	transform: translateX(-50%);
 	border-radius: 50%;
 	z-index: 1;
-	background-color: var(--main-color);
+	background-color: var(--color-two);
 }
 
 .btn-style-two:hover:before{
@@ -1109,7 +1112,7 @@ img{
 	color: var(--color-two);
 	font-size: var(--font-14);
 	text-transform: capitalize;
-	background-color: var(--color-two);
+	background-color: var(--main-color);
 }
 
 .btn-style-three:before{
@@ -1125,7 +1128,7 @@ img{
 	transform: translateX(-50%);
 	border-radius: 50%;
 	z-index: 1;
-	background-color: var(--color-nine);
+	background-color: var(--color-two);
 }
 
 .btn-style-three:hover:before{
@@ -1194,11 +1197,11 @@ img{
 	border-radius:5px;
 	padding:19px 45px;
 	display:inline-block;
-	color: var(--color-nine);
+	color: var(--white-color);
 	font-size: var(--font-16);
 	text-transform: capitalize;
     font-family: 'Lexend', sans-serif;
-	background-color: var(--color-seven);
+	background-color: var(--main-color);
 }
 
 .btn-style-four:before{
@@ -1214,7 +1217,7 @@ img{
 	transform: translateX(-50%);
 	border-radius: 50%;
 	z-index: 1;
-	background-color: var(--main-color);
+	background-color: var(--color-two);
 }
 
 .btn-style-four:hover:before{
@@ -1374,8 +1377,8 @@ img{
 	color: var(--color-nine);
 	font-size: var(--font-16);
 	text-transform: capitalize;
-    font-family: 'Lexend', sans-serif;
-	background-color: #C5E96B;
+    font-family: 'Montserrat', sans-serif;
+	background-color: var(--color-seven);
 	border:2px solid var(--color-nine);
 }
 
@@ -1475,7 +1478,7 @@ img{
 	position: relative;
     font-weight: 600;
 	display: inline-block;
-	color: white;
+	color: var(--main-color);
 	font-size:var(--font-16);
 	text-transform:uppercase;
 }

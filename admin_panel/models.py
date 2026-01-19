@@ -147,7 +147,7 @@ class GalleryImage(OptimizedImageModel):
 class DonationDetails(models.Model):
     donor_name = models.CharField(max_length=200)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    purpose = models.CharField(max_length=200)
+    # purpose = models.CharField(max_length=200)
     payment_method = models.CharField(max_length=100)
     transaction_id = models.CharField(max_length=200, blank=True)
     email = models.EmailField(blank=True)
