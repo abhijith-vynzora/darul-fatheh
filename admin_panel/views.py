@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import StudentRegistrationForm
+import threading
 
 from .models import (
     ManagementTeam, Course, News, Event, Category,
@@ -880,11 +881,18 @@ def gallery_page(request):
 
 #donation page 
 
+# admin_panel/views.py
+
 def donate(request):
     if request.method == 'POST':
         form = DonationForm(request.POST)
         if form.is_valid():
-            form.save()
+            donation = form.save(commit=False)
+            
+            donation.payment_method = "UPI / QR Scan"
+            
+            donation.save()
+            
             messages.success(request, 'Thank you! Your donation details have been submitted successfully.')
             return redirect('admin_panel:donate')
     else:
@@ -897,14 +905,26 @@ def donate(request):
 
 # ==================== PUBLIC REGISTRATION VIEW ====================
 
+def send_email_in_thread(subject, message, recipient_list):
+    try:
+        print("Attempting to send email...") # Debug log
+        send_mail(
+            subject,
+            message,
+            settings.EMAIL_HOST_USER,
+            recipient_list,
+            fail_silently=False,
+        )
+        print("Email sent successfully!") # Debug log
+    except Exception as e:
+        # If email fails, print error to logs but DON'T crash the user's page
+        print(f"Error sending email: {e}")
+
+# 2. THE MAIN VIEW
 def register_view(request):
     """
-    Handles student registration:
-    1. Validates the form.
-    2. Saves the student to the database.
-    3. Sends an email notification to the admin.
+    Handles student registration with background email sending.
     """
-    
     form = StudentRegistrationForm()
     
     if request.method == 'POST':
@@ -913,7 +933,7 @@ def register_view(request):
         if form.is_valid():
             student = form.save()
             
-           
+            # Prepare Email Content
             course_title = student.course.title if student.course else "Not Selected"
             program_specific = student.program_name if student.program_name else "N/A"
             
@@ -935,26 +955,22 @@ def register_view(request):
             
             recipient_list = [settings.EMAIL_HOST_USER]  
             
-            try:
-                send_mail(
-                    subject,
-                    message,
-                    settings.EMAIL_HOST_USER,  
-                    recipient_list,            
-                    fail_silently=False,
-                )
-                messages.success(request, 'Registration successful! We have received your details.')
-            except Exception as e:
-                print(f"Email sending failed: {e}")
-                messages.warning(request, 'Registration saved, but confirmation email could not be sent.')
+            # --- CRITICAL FIX: Send Email in Background ---
+            # This creates a separate "worker" to handle the email so the 
+            # main website can respond "Success" immediately.
+            email_thread = threading.Thread(
+                target=send_email_in_thread, 
+                args=(subject, message, recipient_list)
+            )
+            email_thread.start()
+            # ----------------------------------------------
 
-           
+            messages.success(request, 'Registration successful! We have received your details.')
             return redirect('admin_panel:register')
             
         else:
             messages.error(request, 'Please correct the errors in the form below.')
             
-    
     return render(request, 'register.html', {'form': form})
 
 
