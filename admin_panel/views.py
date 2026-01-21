@@ -6,11 +6,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count, Q
 from django.utils import timezone
 from django.utils.text import slugify
-from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import StudentRegistrationForm
-import threading
+# import threading
 
 from .models import (
     ManagementTeam, Course, News, Event, Category,
@@ -905,74 +904,76 @@ def donate(request):
 
 # ==================== PUBLIC REGISTRATION VIEW ====================
 
-def send_email_in_thread(subject, message, recipient_list):
-    try:
-        print("Attempting to send email...") # Debug log
-        send_mail(
-            subject,
-            message,
-            settings.EMAIL_HOST_USER,
-            recipient_list,
-            fail_silently=False,
-        )
-        print("Email sent successfully!") # Debug log
-    except Exception as e:
-        # If email fails, print error to logs but DON'T crash the user's page
-        print(f"Error sending email: {e}")
+# def send_email_in_thread(subject, message, recipient_list):
+#     try:
+#         print("Attempting to send email...") # Debug log
+#         send_mail(
+#             subject,
+#             message,
+#             settings.EMAIL_HOST_USER,
+#             recipient_list,
+#             fail_silently=False,
+#         )
+#         print("Email sent successfully!") # Debug log
+#     except Exception as e:
+#         # If email fails, print error to logs but DON'T crash the user's page
+#         print(f"Error sending email: {e}")
 
 # 2. THE MAIN VIEW
+
 def register_view(request):
     """
-    Handles student registration with background email sending.
+    Handles student registration and sends an email notification to admin.
     """
     form = StudentRegistrationForm()
-    
+
     if request.method == 'POST':
         form = StudentRegistrationForm(request.POST)
-        
+
         if form.is_valid():
             student = form.save()
-            
-            # Prepare Email Content
+
             course_title = student.course.title if student.course else "Not Selected"
             program_specific = student.program_name if student.program_name else "N/A"
-            
+
             subject = f"New Student Registration: {student.first_name} {student.last_name}"
-            
+
             message = (
                 f"A new student has registered via the website.\n\n"
-                f"--------------------------------------------\n"
                 f"FULL NAME: {student.first_name} {student.last_name}\n"
-                f"DOB:       {student.dob}\n"
-                f"EMAIL:     {student.email}\n"
-                f"MOBILE:    {student.mobile}\n"
-                f"--------------------------------------------\n"
-                f"COURSE:     {course_title}\n"
-                f"SPECIFIC PROGRAM: {program_specific}\n"
-                f"--------------------------------------------\n\n"
-                f"Please verify this entry in the Admin Panel."
+                f"DOB: {student.dob}\n"
+                f"EMAIL: {student.email}\n"
+                f"MOBILE: {student.mobile}\n"
+                f"COURSE: {course_title}\n"
+                f"PROGRAM: {program_specific}\n"
             )
-            
-            recipient_list = [settings.EMAIL_HOST_USER]  
-            
-            # --- CRITICAL FIX: Send Email in Background ---
-            # This creates a separate "worker" to handle the email so the 
-            # main website can respond "Success" immediately.
-            email_thread = threading.Thread(
-                target=send_email_in_thread, 
-                args=(subject, message, recipient_list)
-            )
-            email_thread.start()
-            # ----------------------------------------------
 
-            messages.success(request, 'Registration successful! We have received your details.')
+            try:
+                send_mail(
+                    subject,
+                    message,
+                    settings.EMAIL_HOST_USER,
+                    [settings.EMAIL_HOST_USER],
+                    fail_silently=False,
+                )
+            except Exception as e:
+                import traceback
+                print("EMAIL ERROR:")
+                print(traceback.format_exc())
+
+            messages.success(
+                request,
+                "Registration successful! We have received your details."
+            )
             return redirect('admin_panel:register')
-            
-        else:
-            messages.error(request, 'Please correct the errors in the form below.')
-            
-    return render(request, 'register.html', {'form': form})
 
+        else:
+            messages.error(
+                request,
+                "Please correct the errors below and submit again."
+            )
+
+    return render(request, 'register.html', {'form': form})
 
 # ==================== STUDENT REGISTRATION VIEWS ====================
 
