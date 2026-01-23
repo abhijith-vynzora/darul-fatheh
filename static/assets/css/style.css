@@ -1452,8 +1452,9 @@
 
 .testimonial-one{
     position: relative;
-    padding: 110px 0px 80px;
+    padding: 100px 0px 80px;
     background-size: cover;
+	height: 650px;
 }
 
 .testimonial-one_image-column{
@@ -1472,7 +1473,7 @@
     width: 100%;
     display: block;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 20px;
 }
 
 .testimonial-one_carousel-column{
@@ -1498,7 +1499,7 @@
     border-radius: 5px;
     padding: 10px 16px;
     display: inline-block;
-    background-color: var(--white-color);
+    /* background-color: var(--white-color); */
 }
 
 .testimonial-block_one-rating span{
@@ -1513,7 +1514,7 @@
     position: relative;
     font-weight: 500;
     font-size: var(--font-30);
-    color: var(--black-color);
+    color: var(--white-color);
     margin-top: var(--margin-top-40);
 }
 
@@ -1523,7 +1524,7 @@
     opacity: 0.80;
     line-height: 38px;
     font-size: var(--font-24);
-    color: var(--main-color);
+    color: var(--white-color);
     margin-top: var(--margin-top-35);
     padding-right: var(--padding-right-20);
 }
@@ -1532,7 +1533,7 @@
     position: relative;
     min-height: 99px;
     font-size: var(--font-22);
-    color: var(--black-color);
+    color: var(--white-color);
     margin-top: var(--margin-top-35);
     padding-top: var(--padding-top-25);
     padding-left: var(--padding-left-115);
@@ -1553,7 +1554,7 @@
     display: block;
     border-radius: 150px;
     font-size: var(--font-16);
-    color: var(--color-twentyfour);
+    color: var(--white-color);
     margin-top: var(--margin-top-5);
 }
 

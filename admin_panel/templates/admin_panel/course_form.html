@@ -111,15 +111,9 @@
                                         {% endif %}
                                     </div>
                                 </div>
-
-                                {% comment %} <div class="col-12 mb-4">
-                                    <label class="form-label">Short Description (Card Summary)</label>
-                                    <textarea name="short_description" id="short_description" class="form-control modern-input">{% if course %}{{ course.short_description }}{% endif %}</textarea>
-                                    <small class="text-muted">Brief summary shown on the course listing cards (approx 1-2 sentences).</small>
-                                </div> {% endcomment %}
                                 
                                 <div class="col-12 mb-4">
-                                    <label class="form-label">Detailed Course Description <span class="text-danger">*</span></label>
+                                    <label class="form-label">Course Description <span class="text-danger">*</span></label>
                                     <textarea name="description" id="description" class="form-control modern-input">{% if course %}{{ course.description }}{% endif %}</textarea>
                                 </div>
                                 
@@ -143,42 +137,26 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 
 <script>
-    // Variables to store editor instances
-    let shortDescEditor;
-    let fullDescEditor;
+    // Variable to store editor instance
+    let descEditor;
 
     document.addEventListener('DOMContentLoaded', function () {
         
-        // 1. Init Short Description (Simplified Toolbar)
-        ClassicEditor
-            .create(document.querySelector('#short_description'), {
-                toolbar: ['bold', 'italic', 'bulletedList', 'undo', 'redo'],
-                placeholder: 'Enter a short summary...'
-            })
-            .then(editor => {
-                shortDescEditor = editor;
-            })
-            .catch(error => console.error(error));
-
-        // 2. Init Detailed Description (Full Toolbar)
+        // Init Description Editor (Full Toolbar)
         ClassicEditor
             .create(document.querySelector('#description'), {
                 toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'blockQuote', 'undo', 'redo']
             })
             .then(editor => {
-                fullDescEditor = editor;
+                descEditor = editor;
             })
             .catch(error => console.error(error));
 
-        // 3. Force Update on Submit (Crucial Fix)
+        // Force Update on Submit (Crucial Fix)
         document.querySelector('#courseForm').addEventListener('submit', function(e) {
-            if(shortDescEditor) {
-                const shortData = shortDescEditor.getData();
-                document.querySelector('#short_description').value = shortData;
-            }
-            if(fullDescEditor) {
-                const fullData = fullDescEditor.getData();
-                document.querySelector('#description').value = fullData;
+            if(descEditor) {
+                const descData = descEditor.getData();
+                document.querySelector('#description').value = descData;
             }
         });
     });

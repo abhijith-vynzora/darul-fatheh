@@ -35,7 +35,7 @@
             margin-bottom: 20px;
             line-height: 1.6em;
             display: -webkit-box;
-            -webkit-line-clamp: 4; /* Limits text to 6 lines */
+            -webkit-line-clamp: 4; /* Limits text to 4 lines */
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -100,11 +100,7 @@
                             </h4>
 
                             <div class="course-desc-preview">
-                                {% if course.short_description %}
-                                    {{ course.short_description|striptags }}
-                                {% else %}
-                                    {{ course.description|striptags|truncatewords:45 }}
-                                {% endif %}
+                                {{ course.description|striptags|truncatewords:45 }}
                             </div>
 
                         </div>

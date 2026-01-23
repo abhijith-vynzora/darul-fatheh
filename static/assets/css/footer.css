@@ -24,7 +24,6 @@
 }
 
 .main-footer.style-three .footer_socials a:hover{
-    /* CHANGED: Replaced Yellow with Deep Red */
     background-color: var(--color-two);
     color: var(--white-color);
 }
@@ -56,7 +55,6 @@
 }
 
 .main-footer.style-four .footer_socials a:hover{
-    /* CHANGED: Replaced Lime Green with Deep Red */
     background-color: var(--color-two);
     color: var(--white-color);
 }
@@ -74,7 +72,6 @@
 }
 
 .main-footer.style-four .newsletter-box .form-group button{
-    /* CHANGED: Replaced Lime Green with Navy Blue */
     background-color: var(--main-color);
     color: var(--white-color);
 }
@@ -106,7 +103,6 @@
     right:50px;
     bottom:0px;
     border-radius:0px 0px 50px 50px;
-    /* CHANGED: Replaced Lime Green with Navy Blue */
     background-color: var(--main-color);
 }
 
@@ -167,7 +163,6 @@
 }
 
 .footer_socials a:hover{
-    /* CHANGED: Replaced Yellow/Green with Deep Red */
     color: var(--white-color);
     background-color: var(--color-two);
 
@@ -243,7 +238,6 @@
     top: -3px;
     opacity: 0;
     font-weight: 800;
-    /* CHANGED: Icon color to Navy Blue on hover */
     color: var(--main-color);
     font-family: 'Font Awesome 5 Free';
     transition:all 300ms ease;
@@ -254,7 +248,6 @@
 }
 
 .footer-list li a:hover{
-    /* CHANGED: Text color to Deep Red on hover */
     color: var(--color-two); 
     padding-left: var(--padding-left-25);
 }
@@ -310,7 +303,6 @@
     border-radius: 50px;
     font-weight: 800;
     font-family: "Font Awesome 5 Free";
-    /* CHANGED: Replaced Yellow with Deep Red */
     background-color: var(--color-two);
 }
 
@@ -327,11 +319,9 @@
     position: relative;
     padding: 40px 0px;
     border-top: 1px solid rgba(255,255,255,0.10);
-    /* FORCE Center Alignment */
     text-align: center !important; 
 }
 
-/* Ensure the inner container doesn't block centering */
 .footer-bottom .auto-container,
 .footer-bottom .inner-container {
     text-align: center !important;
@@ -346,7 +336,6 @@
     font-size: var(--font-14);
     color: var(--white-color);
     
-    /* CRITICAL: Force full width and center text */
     display: block !important;
     width: 100% !important;
     text-align: center !important;
@@ -354,7 +343,6 @@
     margin: 0 auto;
 }
 
-/* If you have a footer nav, center it below/above */
 .footer-nav {
     position: relative;
     display: inline-block !important;
@@ -388,4 +376,15 @@
     right: 0px;
     bottom: 0px;
     background-size: cover;
+}
+
+/* Remove checkmark hover effect from footer links */
+.footer_list li a::before,
+.footer-list li a::before {
+    display: none !important;
+}
+
+.footer_list li a:hover,
+.footer-list li a:hover {
+    padding-left: 0 !important;
 }

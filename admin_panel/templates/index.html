@@ -20,6 +20,35 @@
     .sec-title_title {
         color: var(--main-color) !important;
     }
+    /* Fix testimonial author images on homepage */
+.testimonial-block_one-author .author-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+}
+
+.testimonial-block_one-author .author-image {
+    width: 99px !important;
+    height: 99px !important;
+    overflow: hidden !important;
+    border-radius: 50% !important;
+}
+
+/* Also fix for any other testimonial blocks */
+.testimonial-block_one .author-image img,
+.testimonial-block_two .author-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+}
+
+.testimonial-block_one .author-image,
+.testimonial-block_two .author-image {
+    overflow: hidden !important;
+    border-radius: 50% !important;
+}
     
 </style>
 

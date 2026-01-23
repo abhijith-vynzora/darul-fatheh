@@ -8,196 +8,873 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 
 <style>
-    /* Prevents footer overlap and clears bottom white space */
+    /* ══════════════════════════════════════════════════════════
+       BASE STYLES
+    ══════════════════════════════════════════════════════════ */
     .main-page-content {
         position: relative;
         z-index: 1;
-        padding-bottom: 0px !important; 
         background: #fff;
     }
 
-    /* --- NEW STATS SECTION STYLES --- */
-    .stats-overview-section {
+    .section-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'Public Sans', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--color-two);
+        margin-bottom: 15px;
+    }
+
+    .section-badge::before,
+    .section-badge::after {
+        content: '';
+        width: 20px;
+        height: 1px;
+        background: var(--color-two);
+    }
+
+    .section-heading {
+        font-family: 'Inter', sans-serif;
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: var(--main-color);
+        margin: 0 0 15px;
+        line-height: 1.2;
+    }
+
+    .section-desc {
+        font-family: 'Public Sans', sans-serif;
+        font-size: 1.1rem;
+        line-height: 1.7;
+        color: #666;
+        max-width: 600px;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       INTRO SECTION
+    ══════════════════════════════════════════════════════════ */
+    .intro-section {
+        padding: 80px 0 60px;
+        background: #fff;
         position: relative;
-        padding: 50px 0 30px;
-        background: #fff;
-        margin-top: -50px; 
-        z-index: 10;
     }
 
-    .stats-container-card {
-        background: #ffffff;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-        border-radius: 15px;
-        padding: 40px 20px;
-        border-bottom: 4px solid var(--color-two);
+    .intro-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    .intro-content .section-heading {
+        font-size: 2.5rem;
+    }
+
+    .intro-content .section-desc {
+        margin-bottom: 30px;
+        max-width: 100%;
+    }
+
+    .intro-features {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .intro-feature {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .intro-feature-icon {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        background: linear-gradient(135deg, var(--main-color) 0%, #1a3a2a 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 1.2rem;
+    }
+
+    .intro-feature h4 {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--main-color);
+        margin: 0 0 5px;
+    }
+
+    .intro-feature p {
+        font-family: 'Public Sans', sans-serif;
+        font-size: 0.95rem;
+        color: #777;
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    .intro-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+
+    .intro-stat-card {
+        background: #f8f9fa;
+        border-radius: 20px;
+        padding: 35px 25px;
+        text-align: center;
         position: relative;
         overflow: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid #eee;
     }
 
-    /* Background pattern for the stats card */
-    .stats-container-card::before {
+    .intro-stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        border-color: transparent;
+    }
+
+    .intro-stat-card::before {
         content: '';
         position: absolute;
+        top: 0;
+        left: 0;
         right: 0;
-        bottom: 0;
-        width: 150px;
-        height: 150px;
-        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f0f0f0' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        opacity: 0.5;
-        z-index: 0;
-    }
-
-    .stat-item-block {
-        position: relative;
-        z-index: 1;
-        text-align: center;
-        border-right: 1px solid #eee;
-        padding: 0 15px;
+        height: 4px;
+        background: var(--color-two);
+        transform: scaleX(0);
         transition: transform 0.3s ease;
     }
 
-    .stat-item-block:last-child {
-        border-right: none;
+    .intro-stat-card:hover::before {
+        transform: scaleX(1);
     }
 
-    .stat-item-block:hover {
-        transform: translateY(-5px);
+    .intro-stat-icon {
+        width: 60px;
+        height: 60px;
+        background: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
 
-    .stat-icon-box {
-        font-size: 3rem;
-        color: var(--color-two);
-        margin-bottom: 15px;
-        display: inline-block;
+    .intro-stat-icon i {
+        font-size: 1.5rem;
+        color: var(--main-color);
     }
 
-    .stat-count-box {
+    .intro-stat-number {
+        font-family: 'Inter', sans-serif;
         font-size: 2.5rem;
         font-weight: 800;
         color: var(--main-color);
         line-height: 1;
         margin-bottom: 5px;
-        font-family: 'Inter', sans-serif;
     }
 
-    .stat-title {
-        font-size: 1rem;
-        color: #666;
+    .intro-stat-label {
+        font-family: 'Public Sans', sans-serif;
+        font-size: 0.85rem;
+        color: #888;
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 1px;
     }
 
     @media (max-width: 991px) {
-        .stat-item-block {
-            border-right: none;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 30px;
-            margin-bottom: 30px;
+        .intro-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
         }
-        .stat-item-block:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        .stats-overview-section {
-            margin-top: 0;
+        .intro-stats {
+            max-width: 500px;
+            margin: 0 auto;
         }
     }
 
-    /* --- EXISTING PAGE STYLES --- */
-
-    /* Alumni Card Design */
-    .alumni-spotlight-item { padding: 10px; }
-    
-    .profile-card-lengthy {
-        background: #ffffff;
-        border-radius: 12px;
-        padding: 20px 15px;
-        text-align: center;
-        transition: all 0.4s ease;
-        border: 1px solid #eee;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        display: flex !important;
-        flex-direction: column;
-        align-items: center;
-        min-height: 400px; 
-        max-width: 300px; 
-        margin: 0 auto;
+    @media (max-width: 575px) {
+        .intro-stats {
+            grid-template-columns: 1fr;
+        }
+        .section-heading {
+            font-size: 2rem;
+        }
     }
 
-    .alumni-bio-text {
-        color: #555;
-        font-size: 1.05rem; 
-        line-height: 1.4;
-        margin-top: 10px;
-        flex-grow: 1;
-    }
-
-    .member-name {
-        color: var(--color-two);
-        font-weight: 800;
-        font-size: 1.3rem; 
-        margin-top: 5px;
-        margin-bottom: 0;
-    }
-
-    .avatar-box {
-        width: 100px;
-        height: 100px; 
-        margin-bottom: 5px;
-    }
-
-    .avatar-box img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid #f8f8f8;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    /* Fixed Image Event Section */
+    {% comment %} /* ══════════════════════════════════════════════════════════
+       EVENTS SECTION
+    ══════════════════════════════════════════════════════════ */
     .events-section {
+        padding: 90px 0 120px;
+        background: var(--main-color);
         position: relative;
-        background: #f9f9f9;
-        padding: 60px 0;
+        overflow: hidden;
     }
 
-    .event-detail-row {
+    .events-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .events-header .section-badge {
+        color: var(--color-two);
+    }
+
+    .events-header .section-badge::before,
+    .events-header .section-badge::after {
+        background: var(--color-two);
+    }
+
+    .events-header .section-heading {
+        color: #fff;
+    }
+
+    .events-header .section-desc {
+        margin: 0 auto;
+        color: rgba(255,255,255,0.8);
+    }
+
+    .events-carousel-wrapper {
+        position: relative;
+    }
+
+    .events-slick {
+        margin: 0 -20px;
+    }
+
+    .event-slide {
+        padding: 20px;
+    }
+
+    .event-card {
         background: #fff;
-        border-radius: 15px;
-        margin-bottom: 30px;
+        border-radius: 20px;
         overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        transition: all 0.4s ease;
         display: flex;
-        align-items: stretch;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+        flex-direction: row;
+        height: 340px;
     }
 
-    .event-img-box {
-        width: 350px !important; 
-        min-width: 350px !important;
-        height: 250px !important;
-        flex: 0 0 350px !important; 
+    .event-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
+
+    .event-image {
+        width: 340px;
+        min-width: 340px;
+        height: 100%;
+        position: relative;
         overflow: hidden;
     }
 
-    .event-img-box img {
+    .event-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .event-card:hover .event-image img {
+        transform: scale(1.1);
+    }
+
+    .event-date-badge {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: var(--color-two);
+        color: #fff;
+        padding: 14px 16px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        z-index: 2;
+    }
+
+    .event-date-day {
+        display: block;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.7rem;
+        font-weight: 800;
+        line-height: 1;
+    }
+
+    .event-date-month {
+        display: block;
+        font-family: 'Public Sans', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 4px;
+        opacity: 0.9;
+    }
+
+    .event-body {
+        padding: 30px 35px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+    }
+
+    .event-meta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+    }
+
+    .event-meta-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'Public Sans', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #888;
+        background: #f5f5f5;
+        padding: 6px 12px;
+        border-radius: 15px;
+    }
+
+    .event-meta-item i {
+        color: var(--color-two);
+        font-size: 0.75rem;
+    }
+
+    .event-title {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--main-color);
+        margin: 0 0 15px;
+        line-height: 1.35;
+        transition: color 0.3s ease;
+    }
+
+    .event-card:hover .event-title {
+        color: var(--color-two);
+    }
+
+    .event-description {
+        font-family: 'Public Sans', sans-serif;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: #666;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .events-slick .slick-dots {
+        bottom: -50px;
+    }
+
+    .events-slick .slick-dots li button:before {
+        font-size: 12px;
+        color: rgba(255,255,255,0.4);
+        opacity: 1;
+    }
+
+    .events-slick .slick-dots li.slick-active button:before {
+        color: var(--color-two);
+    }
+
+    .events-slick .slick-prev,
+    .events-slick .slick-next {
+        width: 50px;
+        height: 50px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 50%;
+        z-index: 10;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .events-slick .slick-prev:hover,
+    .events-slick .slick-next:hover {
+        background: var(--color-two);
+        border-color: var(--color-two);
+    }
+
+    .events-slick .slick-prev:before,
+    .events-slick .slick-next:before {
+        color: #fff;
+        font-size: 18px;
+        opacity: 1;
+    }
+
+    .events-slick .slick-prev {
+        left: -60px;
+    }
+
+    .events-slick .slick-next {
+        right: -60px;
+    }
+
+    @media (max-width: 1400px) {
+        .events-slick .slick-prev { left: 10px; }
+        .events-slick .slick-next { right: 10px; }
     }
 
     @media (max-width: 991px) {
-        .event-detail-row { flex-direction: column; }
-        .event-img-box { 
-            width: 100% !important; 
-            min-width: 100% !important;
-            flex: 0 0 auto !important;
-            height: 220px !important; 
+        .event-card {
+            flex-direction: column;
+            height: auto;
         }
-        .profile-card-lengthy { min-height: 380px; }
+        .event-image {
+            width: 100%;
+            min-width: 100%;
+            height: 220px;
+        }
+        .event-body {
+            padding: 25px;
+        }
+    }
+
+    .no-events-box {
+        text-align: center;
+        padding: 80px 30px;
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    }
+
+    .no-events-box i {
+        font-size: 4rem;
+        color: #ddd;
+        margin-bottom: 20px;
+        display: block;
+    }
+
+    .no-events-box h4 {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.3rem;
+        color: var(--main-color);
+        margin: 0 0 10px;
+    }
+
+    .no-events-box p {
+        font-family: 'Public Sans', sans-serif;
+        color: #999;
+        margin: 0;
+    } {% endcomment %}
+
+
+    /* ================= EVENTS SECTION ================= */
+
+.events-section {
+    padding: 90px 0 140px;
+    background: var(--main-color);
+}
+
+.events-header {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.events-header .section-heading {
+    color: #fff;
+}
+
+.events-header .section-desc {
+    color: rgba(255,255,255,0.8);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.events-slick {
+    margin: 0 -25px;
+}
+
+.event-slide {
+    padding: 25px;
+}
+
+/* 🔥 INCREASED CARD SIZE */
+.event-card {
+    background: #fff;
+    border-radius: 26px;
+    overflow: hidden;
+    display: flex;
+    height: 420px;
+    box-shadow: 0 12px 45px rgba(0,0,0,0.12);
+    transition: all 0.4s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 28px 60px rgba(0,0,0,0.18);
+}
+
+/* 🔥 BIGGER IMAGE */
+.event-image {
+    width: 420px;
+    min-width: 420px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.event-card:hover .event-image img {
+    transform: scale(1.12);
+}
+
+.event-date-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: var(--color-two);
+    color: #fff;
+    padding: 16px 18px;
+    border-radius: 14px;
+    text-align: center;
+}
+
+.event-date-day {
+    font-size: 1.9rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.event-date-month {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+/* 🔥 MORE SPACE INSIDE */
+.event-body {
+    padding: 40px 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.event-meta {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.event-meta-item {
+    font-size: 0.85rem;
+    background: #f5f5f5;
+    padding: 8px 14px;
+    border-radius: 18px;
+}
+
+/* 🔥 BIGGER TEXT */
+.event-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--main-color);
+    margin-bottom: 18px;
+}
+
+.event-description {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #666;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+    /* ══════════════════════════════════════════════════════════
+       ALUMNI SECTION
+    ══════════════════════════════════════════════════════════ */
+    .alumni-section {
+        padding: 90px 0 120px;
+        background: #f8f9fa;
+        position: relative;
+    }
+
+    .alumni-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .alumni-header .section-desc {
+        margin: 0 auto;
+    }
+
+    .alumni-carousel {
+        position: relative;
+    }
+
+    .alumni-modern-slick {
+        margin: 0 -20px;
+    }
+
+    .alumni-slide {
+        padding: 20px;
+    }
+
+    .alumni-card {
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        height: 300px;
+        transition: all 0.4s ease;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+        border: 1px solid #eee;
+    }
+
+    .alumni-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+        border-color: transparent;
+    }
+
+    .alumni-avatar {
+        width: 260px;
+        min-width: 260px;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .alumni-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .alumni-card:hover .alumni-avatar img {
+        transform: scale(1.08);
+    }
+
+    .alumni-content {
+        flex: 1;
+        padding: 35px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .alumni-name {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--main-color);
+        margin: 0 0 5px;
+        line-height: 1.3;
+    }
+
+    .alumni-batch {
+        font-family: 'Public Sans', sans-serif;
+        font-size: 0.85rem;
+        color: var(--color-two);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+    }
+
+    .alumni-divider {
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--color-two), var(--main-color));
+        border-radius: 2px;
+        margin-bottom: 15px;
+    }
+
+    .alumni-bio {
+        font-family: 'Public Sans', sans-serif;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: #666;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .alumni-modern-slick .slick-dots {
+        bottom: -50px;
+    }
+
+    .alumni-modern-slick .slick-dots li button:before {
+        font-size: 10px;
+        color: #ccc;
+        opacity: 1;
+    }
+
+    .alumni-modern-slick .slick-dots li.slick-active button:before {
+        color: var(--color-two);
+    }
+
+    .alumni-modern-slick .slick-prev,
+    .alumni-modern-slick .slick-next {
+        width: 50px;
+        height: 50px;
+        background: var(--main-color);
+        border-radius: 50%;
+        z-index: 10;
+        transition: all 0.3s ease;
+    }
+
+    .alumni-modern-slick .slick-prev:hover,
+    .alumni-modern-slick .slick-next:hover {
+        background: var(--color-two);
+    }
+
+    .alumni-modern-slick .slick-prev:before,
+    .alumni-modern-slick .slick-next:before {
+        color: #fff;
+        font-size: 18px;
+        opacity: 1;
+    }
+
+    .alumni-modern-slick .slick-prev {
+        left: -60px;
+    }
+
+    .alumni-modern-slick .slick-next {
+        right: -60px;
+    }
+
+    @media (max-width: 1400px) {
+        .alumni-modern-slick .slick-prev { left: 5px; }
+        .alumni-modern-slick .slick-next { right: 5px; }
+    }
+
+    @media (max-width: 991px) {
+        .alumni-card {
+            flex-direction: column;
+            height: auto;
+        }
+        .alumni-avatar {
+            width: 100%;
+            min-width: 100%;
+            height: 220px;
+        }
+        .alumni-content {
+            padding: 25px;
+        }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       CTA SECTION
+    ══════════════════════════════════════════════════════════ */
+    .cta-section {
+        padding: 80px 0;
+        background: linear-gradient(135deg, var(--main-color) 0%, #1a3a2a 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23fff' stroke-width='0.5' opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='25'/%3E%3Cpath d='M30 5 L30 55 M5 30 L55 30'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .cta-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .cta-content .section-badge {
+        color: var(--color-two);
+    }
+
+    .cta-content .section-badge::before,
+    .cta-content .section-badge::after {
+        background: var(--color-two);
+    }
+
+    .cta-content .section-heading {
+        color: #fff;
+        margin-bottom: 20px;
+    }
+
+    .cta-content .section-desc {
+        color: rgba(255,255,255,0.8);
+        max-width: 100%;
+        margin-bottom: 35px;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 16px 35px;
+        border-radius: 50px;
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .cta-btn-primary {
+        background: var(--color-two);
+        color: #fff;
+    }
+
+    .cta-btn-primary:hover {
+        background: #fff;
+        color: var(--main-color);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .cta-btn-outline {
+        background: transparent;
+        color: #fff;
+        border: 2px solid rgba(255,255,255,0.3);
+    }
+
+    .cta-btn-outline:hover {
+        border-color: #fff;
+        background: rgba(255,255,255,0.1);
+        transform: translateY(-3px);
     }
 </style>
 {% endblock %}
@@ -205,169 +882,289 @@
 {% block content %}
 <div class="main-page-content">
     
+    <!-- PAGE TITLE BANNER -->
     <section class="page-title" style="background-image:url({% static 'assets/images/background/page-title.jpg' %})">
         <div class="auto-container">
-            <h2>Alumni Spotlight</h2>
+            <h2>Alumni & Events</h2>
         </div>
     </section>
 
-    <section class="stats-overview-section">
+    <!-- INTRO SECTION -->
+    <section class="intro-section">
         <div class="auto-container">
-            <div class="stats-container-card">
-                <div class="row clearfix align-items-center">
+            <div class="intro-grid">
+                <div class="intro-content">
+                    <span class="section-badge">Our Legacy</span>
+                    <h2 class="section-heading">Building Tomorrow's Islamic Scholars</h2>
+                    <p class="section-desc">
+                        For over 15 years, Darul Fatheh has been nurturing students in Islamic education, 
+                        producing graduates who serve communities across Kerala and beyond. Our alumni 
+                        are our greatest achievement — living testimonies to quality Islamic education.
+                    </p>
                     
-                    <div class="col-lg-3 col-md-6 col-sm-12 stat-item-block">
-                        <div class="inner-box">
-                            <div class="stat-icon-box">
-                                <i class="fa-solid fa-users-line"></i>
+                    <div class="intro-features">
+                        <div class="intro-feature">
+                            <div class="intro-feature-icon">
+                                <i class="fa-solid fa-book-quran"></i>
                             </div>
-                            <div class="stat-count-box">
-                                <span class="odometer" data-count="120">0</span>+
+                            <div>
+                                <h4>Comprehensive Curriculum</h4>
+                                <p>Traditional Islamic sciences combined with modern educational approaches</p>
                             </div>
-                            <div class="stat-title">Currently Studying</div>
+                        </div>
+                        <div class="intro-feature">
+                            <div class="intro-feature-icon">
+                                <i class="fa-solid fa-hands-holding-child"></i>
+                            </div>
+                            <div>
+                                <h4>Community Service</h4>
+                                <p>Our graduates serve as Imams, teachers, and community leaders</p>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-12 stat-item-block">
-                        <div class="inner-box">
-                            <div class="stat-icon-box">
-                                <i class="fa-solid fa-graduation-cap"></i>
-                            </div>
-                            <div class="stat-count-box">
-                                <span class="odometer" data-count="850">0</span>+
-                            </div>
-                            <div class="stat-title">Alumni Graduates</div>
+                </div>
+                
+                <div class="intro-stats">
+                    <div class="intro-stat-card">
+                        <div class="intro-stat-icon">
+                            <i class="fa-solid fa-users-line"></i>
                         </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-12 stat-item-block">
-                        <div class="inner-box">
-                            <div class="stat-icon-box">
-                                <i class="fa-solid fa-chalkboard-user"></i>
-                            </div>
-                            <div class="stat-count-box">
-                                <span class="odometer" data-count="45">0</span>
-                            </div>
-                            <div class="stat-title">Qualified Teachers</div>
+                        <div class="intro-stat-number">
+                            <span class="odometer" data-count="120">0</span>+
                         </div>
+                        <div class="intro-stat-label">Currently Studying</div>
                     </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-12 stat-item-block">
-                        <div class="inner-box">
-                            <div class="stat-icon-box">
-                                <i class="fa-solid fa-mosque"></i>
-                            </div>
-                            <div class="stat-count-box">
-                                <span class="odometer" data-count="15">0</span>
-                            </div>
-                            <div class="stat-title">Years of Service</div>
+                    
+                    <div class="intro-stat-card">
+                        <div class="intro-stat-icon">
+                            <i class="fa-solid fa-graduation-cap"></i>
                         </div>
+                        <div class="intro-stat-number">
+                            <span class="odometer" data-count="850">0</span>+
+                        </div>
+                        <div class="intro-stat-label">Alumni Graduates</div>
                     </div>
-
+                    
+                    <div class="intro-stat-card">
+                        <div class="intro-stat-icon">
+                            <i class="fa-solid fa-chalkboard-user"></i>
+                        </div>
+                        <div class="intro-stat-number">
+                            <span class="odometer" data-count="45">0</span>
+                        </div>
+                        <div class="intro-stat-label">Expert Teachers</div>
+                    </div>
+                    
+                    <div class="intro-stat-card">
+                        <div class="intro-stat-icon">
+                            <i class="fa-solid fa-mosque"></i>
+                        </div>
+                        <div class="intro-stat-number">
+                            <span class="odometer" data-count="15">0</span>
+                        </div>
+                        <div class="intro-stat-label">Years of Service</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- EVENTS SECTION -->
     <section class="events-section">
         <div class="auto-container">
-            <div class="sec-title">
-                <h2 class="sec-title_heading">Upcoming Events & Programs</h2>
+            <div class="events-header">
+                <span class="section-badge">Upcoming Programs</span>
+                <h2 class="section-heading">Events & Activities</h2>
+                <p class="section-desc">
+                    Join us for enriching programs, gatherings, and celebrations that bring 
+                    our community together in the pursuit of knowledge and spiritual growth.
+                </p>
             </div>
-            {% for event in events %}
-            <div class="event-detail-row">
-                <div class="event-img-box">
-                    <img src="{{ event.image.url }}" alt="{{ event.event_name }}">
-                </div>
-                <div class="p-4 d-flex flex-column justify-content-center">
-                    <span style="color: var(--color-two); font-weight: 700; margin-bottom: 5px; display: block; font-size: 0.9rem;">
-                        <i class="fa fa-calendar-alt"></i> {{ event.date|date:"F d, Y" }}
-                    </span>
-                    <h3 style="color: var(--main-color); font-size: 1.6rem; margin-bottom: 10px;">{{ event.event_name }}</h3>
-                    <div style="font-size: 1.1rem; line-height: 1.6; color: #444;">
-                        {{ event.description|safe }}
-                    </div>
-                </div>
-            </div>
-            {% empty %}
-            <div class="text-center py-5">
-                <p class="text-muted">No upcoming events are currently visible.</p>
-            </div>
-            {% endfor %}
-        </div>
-    </section>
 
-    <section class="spotlight-section pt-5 pb-5">
-        <div class="auto-container">
-            <div class="sec-title centered">
-                <h2 class="sec-title_heading">Our Alumni Stories</h2>
-            </div>
-            <div class="alumni-modern-slick">
-                {% for person in alumni %}
-                <div class="alumni-spotlight-item">
-                    <div class="profile-card-lengthy">
-                        <div class="avatar-box">
-                            <img src="{{ person.photo.url|default:'/static/assets/images/resource/author-1.jpg' }}" alt="{{ person.name }}">
+            <div class="events-carousel-wrapper">
+                {% if events %}
+                <div class="events-slick">
+                    {% for event in events %}
+                    <div class="event-slide">
+                        <div class="event-card">
+                            <div class="event-image">
+                                <img src="{{ event.image.url }}" alt="{{ event.event_name }}">
+                                <div class="event-date-badge">
+                                    <span class="event-date-day">{{ event.date|date:"d" }}</span>
+                                    <span class="event-date-month">{{ event.date|date:"M" }}</span>
+                                </div>
+                            </div>
+                            <div class="event-body">
+                                <div class="event-meta">
+                                    <span class="event-meta-item">
+                                        <i class="fa-regular fa-calendar"></i>
+                                        {{ event.date|date:"l" }}
+                                    </span>
+                                    <span class="event-meta-item">
+                                        <i class="fa-regular fa-clock"></i>
+                                        {{ event.date|date:"Y" }}
+                                    </span>
+                                </div>
+                                <h3 class="event-title">{{ event.event_name }}</h3>
+                                <p class="event-description">{{ event.description|safe }}</p>
+                            </div>
                         </div>
-                        <h3 class="member-name">{{ person.name }}</h3>
-                        <p class="alumni-bio-text">
-                            {{ person.description|striptags|truncatechars:250 }}
-                        </p>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
+                {% else %}
+                <div class="no-events-box">
+                    <i class="fa-regular fa-calendar-xmark"></i>
+                    <h4>No Upcoming Events</h4>
+                    <p>Stay tuned! New events and programs will be announced soon.</p>
+                </div>
+                {% endif %}
             </div>
         </div>
     </section>
 
-    
+    <!-- ALUMNI SECTION -->
+    <section class="alumni-section">
+        <div class="auto-container">
+            <div class="alumni-header">
+                <span class="section-badge">Success Stories</span>
+                <h2 class="section-heading">Our Distinguished Alumni</h2>
+                <p class="section-desc">
+                    Meet the graduates who have gone on to make meaningful contributions 
+                    to Islamic education and community service across the region.
+                </p>
+            </div>
+
+            <div class="alumni-carousel">
+                <div class="alumni-modern-slick">
+                    {% for person in alumni %}
+                    <div class="alumni-slide">
+                        <div class="alumni-card">
+                            <div class="alumni-avatar">
+                                <img src="{{ person.photo.url|default:'/static/assets/images/resource/author-1.jpg' }}" alt="{{ person.name }}">
+                            </div>
+                            <div class="alumni-content">
+                                <h3 class="alumni-name">{{ person.name }}</h3>
+                                <span class="alumni-batch">Alumni</span>
+                                <div class="alumni-divider"></div>
+                                <p class="alumni-bio">{{ person.description|striptags }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="auto-container">
+            <div class="cta-content">
+                <span class="section-badge">Join Our Family</span>
+                <h2 class="section-heading">Begin Your Journey of Knowledge</h2>
+                <p class="section-desc">
+                    Become part of a legacy that has shaped hundreds of Islamic scholars. 
+                    Enroll today and take the first step towards a life of learning and service.
+                </p>
+                <div class="cta-buttons">
+                    <a href="{% url 'admin_panel:register' %}" class="cta-btn cta-btn-primary">
+                        <i class="fa-solid fa-user-plus"></i> Register Now
+                    </a>
+                    <a href="{% url 'admin_panel:contact' %}" class="cta-btn cta-btn-outline">
+                        <i class="fa-solid fa-phone"></i> Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </div>
 {% endblock %}
 
 {% block extra_js %}
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="{% static 'assets/js/odometer.js' %}"></script> 
-<script src="{% static 'assets/js/appear.js' %}"></script>
 
 <script>
-    $(document).ready(function(){
-        // --- 1. Slick Carousel Init ---
-        $('.alumni-modern-slick').slick({
-            dots: true,
-            infinite: true,
-            slidesToShow: 4, 
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            speed: 800,
-            pauseOnHover: true,
-            cssEase: 'ease-in-out',
-            responsive: [
-                { breakpoint: 1200, settings: { slidesToShow: 3 } },
-                { breakpoint: 992, settings: { slidesToShow: 2 } },
-                { breakpoint: 768, settings: { slidesToShow: 1 } }
-            ]
+$(document).ready(function(){
+    
+    // Events Carousel - 2 cards at a time
+    $('.events-slick').slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        speed: 600,
+        pauseOnHover: true,
+        cssEase: 'ease-in-out',
+        arrows: true,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 2,
+                    arrows: true
+                }
+            },
+            {
+                breakpoint: 991,
+                settings: {
+                    slidesToShow: 1,
+                    arrows: false,
+                    dots: true
+                }
+            }
+        ]
+    });
+
+    // Alumni Carousel - 2 cards at a time
+    $('.alumni-modern-slick').slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 4500,
+        speed: 600,
+        pauseOnHover: true,
+        cssEase: 'ease-in-out',
+        arrows: true,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 2,
+                    arrows: true
+                }
+            },
+            {
+                breakpoint: 991,
+                settings: {
+                    slidesToShow: 1,
+                    arrows: false,
+                    dots: true
+                }
+            }
+        ]
+    });
+
+    // Odometer Counter Animation
+    if ($('.odometer').length) {
+        $('.odometer').each(function() {
+            $(this).text('0');
         });
 
-        // --- 2. Counter Animation Fix (Resets to 0 every page load) ---
-        if ($('.odometer').length) {
-            // Force reset to 0 immediately to prevent browser caching the final number
-            $('.odometer').each(function() {
-                $(this).text('0');
-            });
+        $('.odometer').appear(function() {
+            var odo = $(this);
+            var count = odo.attr('data-count');
+            setTimeout(function(){
+                odo.html(count);
+            }, 150);
+        });
+    }
 
-            // Trigger animation when scrolled into view
-            $('.odometer').appear(function() {
-                var odo = $(this);
-                var count = odo.attr('data-count');
-                
-                // Small timeout ensures the '0' state is rendered before animating
-                setTimeout(function(){
-                    odo.html(count);
-                }, 100);
-            });
-        }
-    });
+});
 </script>
 {% endblock %}

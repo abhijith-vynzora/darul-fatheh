@@ -22,8 +22,6 @@ urlpatterns = [
     # Blog / News
     path('blog/', views.blog_page, name='blog'),
     path('news/<slug:slug>/', views.news_detail, name='news_detail'),
-    # path('news/<int:pk>/edit/', views.news_edit, name='news_edit'),
-    # path('news/<int:pk>/delete/', views.news_delete, name='news_delete'),
 
     #Not found 
     path('not-found/', views.not_found_page, name='not-found'),
@@ -33,8 +31,8 @@ urlpatterns = [
 
     # Donate
     path('donate/', views.donate, name='donate'), 
+
     # ==================== ADMIN DASHBOARD URLs (Backend) ====================
-    
     # Authentication
     path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard/login/', views.login_view, name='login'),
@@ -57,12 +55,6 @@ urlpatterns = [
     path('dashboard/news/create/', views.news_create, name='news_create'),
     path('dashboard/news/<int:pk>/edit/', views.news_edit, name='news_edit'),
     path('dashboard/news/<int:pk>/delete/', views.news_delete, name='news_delete'),
-    
-    # # Events URLs
-    # path('dashboard/events/', views.event_list, name='event_list'),
-    # path('dashboard/events/create/', views.event_create, name='event_create'),
-    # path('dashboard/events/<int:pk>/edit/', views.event_edit, name='event_edit'),
-    # path('dashboard/events/<int:pk>/delete/', views.event_delete, name='event_delete'),
     
     # Photo Gallery URLs
     path("dashboard/categories/", views.category_list, name="category_list"),
@@ -98,7 +90,10 @@ urlpatterns = [
 
     path('our-team/', views.our_team, name='team'),
 
-    # Public URL
+
+
+
+    # Public URLs
     path('register/', views.register_view, name='register'),
 
     # Admin Dashboard URLs

@@ -107,7 +107,28 @@
     </section>
     
     <style>
-       
+        img {
+            display: inline-block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+        
+        /* Override for circular testimonial images - more specific selector */
+        .testimonial-block_two-author .author-image img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 50% !important;
+        }
+        
+        /* Ensure parent container is also correct */
+        .testimonial-block_two-author .author-image {
+            width: 80px !important;
+            height: 80px !important;
+            overflow: hidden !important;
+            border-radius: 50% !important;
+        }
     
         /* Mobile Padding Adjustment */
         @media (max-width: 768px) {

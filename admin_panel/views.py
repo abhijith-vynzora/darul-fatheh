@@ -55,7 +55,6 @@ def dashboard(request):
         'total_team': ManagementTeam.objects.count(),
         'total_courses': Course.objects.count(),
         'total_news': News.objects.count(),
-        # 'total_events': Event.objects.count(),
         'total_albums': GalleryImage.objects.count(),
         'total_donations': DonationDetails.objects.count(),
         'total_messages': ContactMessage.objects.all().count(),
@@ -88,13 +87,11 @@ def team_create(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         position = request.POST.get('position')
-        # bio = request.POST.get('bio')
         photo = request.FILES.get('photo')
         
         ManagementTeam.objects.create(
             name=name,
             position=position,
-            # bio=bio,
             photo=photo
         )
         messages.success(request, 'Team member added successfully!')
@@ -109,7 +106,6 @@ def team_edit(request, pk):
     if request.method == 'POST':
         team.name = request.POST.get('name')
         team.position = request.POST.get('position')
-        # team.bio = request.POST.get('bio')
         
         if request.FILES.get('photo'):
             team.photo = request.FILES.get('photo')
@@ -148,14 +144,12 @@ def course_list(request):
 def course_create(request):
     if request.method == 'POST':
         title = request.POST.get('title')
-        short_description = request.POST.get('short_description') or ""
         description = request.POST.get('description')
         duration = request.POST.get('duration')
         thumbnail = request.FILES.get('thumbnail')
 
         Course.objects.create(
             title=title,
-            short_description=short_description,
             description=description,
             duration=duration,
             thumbnail=thumbnail
@@ -172,7 +166,6 @@ def course_edit(request, pk):
     
     if request.method == 'POST':
         course.title = request.POST.get('title')
-        course.short_description = request.POST.get('short_description') or ""
         course.description = request.POST.get('description')
         course.duration = request.POST.get('duration')
         
@@ -268,7 +261,6 @@ def news_delete(request, pk):
     news.delete()
     messages.success(request, 'News deleted successfully!')
     return redirect('admin_panel:news_list')
-
 
 
 # ==================== GALLERY & CATEGORY VIEWS ====================
@@ -377,7 +369,6 @@ def donation_list(request):
 def donation_create(request):
     if request.method == 'POST':
         donor_name = request.POST.get('donor_name')
-        # amount = request.POST.get('amount')
         payment_method = request.POST.get('payment_method')
         transaction_id = request.POST.get('transaction_id')
         email = request.POST.get('email')
@@ -386,7 +377,6 @@ def donation_create(request):
         
         DonationDetails.objects.create(
             donor_name=donor_name,
-            # amount=amount,
             payment_method=payment_method,
             transaction_id=transaction_id,
             email=email,
@@ -402,7 +392,6 @@ def donation_edit(request, pk):
     donation = get_object_or_404(DonationDetails, pk=pk)
     if request.method == 'POST':
         donation.donor_name = request.POST.get('donor_name')
-        # donation.amount = request.POST.get('amount')
         donation.payment_method = request.POST.get('payment_method')
         donation.transaction_id = request.POST.get('transaction_id')
         donation.email = request.POST.get('email')
@@ -419,7 +408,6 @@ def donation_delete(request, pk):
     donation.delete()
     messages.success(request, 'Donation record deleted successfully!')
     return redirect('admin_panel:donation_list')
-
 
 # ==================== CONTACT MESSAGE VIEWS ====================
 @login_required(login_url='admin_panel:login')
@@ -438,7 +426,6 @@ def message_list(request):
 @login_required(login_url='admin_panel:login')
 def message_view(request, pk):
     message = get_object_or_404(ContactMessage, pk=pk)
-    # message.is_read = True
     message.save()
     return render(request, 'admin_panel/message_view.html', {'message': message})
 
@@ -563,7 +550,6 @@ def testimonial_delete(request, pk):
 
 
 # ==================== PUBLIC WEBSITE VIEWS (Frontend) ====================
-
 def index(request):
     courses = Course.objects.filter(is_active=True).order_by('-created_at')[:4]
     news = News.objects.filter(is_published=True).order_by('-published_date')[:3]
@@ -657,7 +643,6 @@ def blog_page(request):
     }
     return render(request, 'blog.html', context)
 
-
 def news_detail(request, slug):
     news = get_object_or_404(News, slug=slug)
     recent_news = News.objects.filter(is_published=True).exclude(slug=slug).order_by('-published_date')[:3]
@@ -705,24 +690,19 @@ def gallery_page(request):
     }
     return render(request, 'gallery.html', context)
 
-
+#public donate view
 def donate(request):
     if request.method == 'POST':
         donor_name = request.POST.get('donor_name')
-        # amount = request.POST.get('amount')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
-        # message = request.POST.get('message')
         screenshot = request.FILES.get('screenshot') 
 
         DonationDetails.objects.create(
             donor_name=donor_name,
-            # amount=amount,
             email=email,
             phone=phone,
-            # message=message,
             screenshot=screenshot,
-            # purpose="General Donation"
         )
         messages.success(request, "Thank you! Your donation details have been submitted for verification.")
         return redirect('admin_panel:donate')
@@ -732,7 +712,6 @@ def donate(request):
 
 # ==================== PUBLIC REGISTRATION VIEW ====================
 
-# 1. THE HELPER FUNCTION (Re-enabled to prevent hanging)
 def send_email_in_thread(subject, message, recipient_list):
     try:
         print("Attempting to send email...") 
@@ -747,11 +726,7 @@ def send_email_in_thread(subject, message, recipient_list):
     except Exception as e:
         print(f"Error sending email: {e}")
 
-# 2. THE MAIN VIEW
 def register_view(request):
-    """
-    Handles student registration with background email sending.
-    """
     form = StudentRegistrationForm()
     
     if request.method == 'POST':
@@ -760,7 +735,6 @@ def register_view(request):
         if form.is_valid():
             student = form.save()
             
-            # Prepare Email Content
             course_title = student.course.title if student.course else "Not Selected"
             program_specific = student.program_name if student.program_name else "N/A"
             
@@ -782,7 +756,6 @@ def register_view(request):
             
             recipient_list = [settings.EMAIL_HOST_USER]  
             
-            # --- STARTING BACKGROUND THREAD ---
             email_thread = threading.Thread(
                 target=send_email_in_thread, 
                 args=(subject, message, recipient_list)
@@ -798,8 +771,57 @@ def register_view(request):
     return render(request, 'register.html', {'form': form})
 
 
-# ==================== STUDENT REGISTRATION VIEWS ====================
+# # ==================== STUDENT REGISTRATION VIEWS FOR LOCAL HOSTING ====================
+# def register_view(request):
+#     form = StudentRegistrationForm()
 
+#     if request.method == 'POST':
+#         form = StudentRegistrationForm(request.POST)
+
+#         if form.is_valid():
+#             student = form.save()
+
+#             course_title = student.course.title if student.course else "Not Selected"
+#             program_specific = student.program_name if student.program_name else "N/A"
+
+#             subject = f"New Student Registration: {student.first_name} {student.last_name}"
+
+#             message = (
+#                 f"A new student has registered via the website.\n\n"
+#                 f"FULL NAME: {student.first_name} {student.last_name}\n"
+#                 f"DOB:       {student.dob}\n"
+#                 f"EMAIL:     {student.email}\n"
+#                 f"MOBILE:    {student.mobile}\n"
+#                 f"COURSE:     {course_title}\n"
+#                 f"SPECIFIC PROGRAM: {program_specific}\n"
+#             )
+
+#             try:
+#                 send_mail(
+#                     subject,
+#                     message,
+#                     settings.DEFAULT_FROM_EMAIL,
+#                     [settings.EMAIL_HOST_USER],
+#                     fail_silently=False,  
+#                 )
+#                 print("Email sent successfully")
+#             except Exception as e:
+#                 print("Email failed locally:", e)
+
+#             messages.success(
+#                 request,
+#                 "Registration successful! We have received your details."
+#             )
+#             return redirect('admin_panel:register')
+
+#         else:
+#             messages.error(request, "Please correct the errors below.")
+
+#     return render(request, 'register.html', {'form': form})
+
+
+
+# ==================== STUDENT REGISTRATION VIEWS ====================
 @login_required(login_url='admin_panel:login')
 def student_list(request):
     student_list = StudentRegistration.objects.all().order_by('-registered_at')
@@ -824,8 +846,6 @@ def student_delete(request, pk):
 
 def page404(request, exception):
     return render(request, 'not-found.html', status=404)
-
-
 
 
 
@@ -899,14 +919,10 @@ def alumni_delete(request, pk):
 
 
 # ==================== ALUMNI EVENT VIEWS ====================
-
 @login_required(login_url='admin_panel:login')
 def alumni_event_list(request):
-    """
-    Lists all alumni events with pagination.
-    """
     event_list = AlumniEvent.objects.all().order_by('-date')
-    paginator = Paginator(event_list, 6)  # Showing 6 items per page
+    paginator = Paginator(event_list, 6)  
     page = request.GET.get('page')
     
     try:
@@ -917,7 +933,6 @@ def alumni_event_list(request):
         events = paginator.page(paginator.num_pages)
     
     return render(request, 'admin_panel/alumni_event_list.html', {'events': events})
-
 
 @login_required(login_url='admin_panel:login')
 def alumni_event_create(request):
@@ -939,7 +954,6 @@ def alumni_event_create(request):
     
     return render(request, 'admin_panel/alumni_event_form.html')
 
-
 @login_required(login_url='admin_panel:login')
 def alumni_event_edit(request, pk):
     event = get_object_or_404(AlumniEvent, pk=pk)
@@ -952,7 +966,6 @@ def alumni_event_edit(request, pk):
         if request.FILES.get('image'):
             event.image = request.FILES.get('image')
         
-        # Correctly toggle visibility based on checkbox
         event.is_visible = 'is_visible' in request.POST 
         
         event.save()
@@ -961,35 +974,16 @@ def alumni_event_edit(request, pk):
     
     return render(request, 'admin_panel/alumni_event_list.html', {'event': event})
 
-
 @login_required(login_url='admin_panel:login')
 def alumni_event_delete(request, pk):
-    """
-    Deletes an alumni event record.
-    """
     event = get_object_or_404(AlumniEvent, pk=pk)
     event.delete()
     messages.success(request, 'Alumni Event deleted successfully!')
     return redirect('admin_panel:alumni_event_list')
 
-
-
-
-# admin_panel/views.py
-
-# views.py
-
 def alumni_public_view(request):
-    """
-    Public frontend view for the Alumni section with visibility filtering.
-    """
-    # Only fetch events marked as visible
     events = AlumniEvent.objects.filter(is_visible=True).order_by('-date')
-    
-    # Only fetch alumni profiles marked as visible
     alumni_list = AlumniProfile.objects.all().order_by('-created_at')
-    
-    # Pagination logic remains the same
     paginator = Paginator(alumni_list, 6) 
     page = request.GET.get('page')
     try:
@@ -1004,3 +998,129 @@ def alumni_public_view(request):
         'alumni': alumni,
     }
     return render(request, 'alumni.html', context)
+
+
+
+
+
+# ==================== email message in html format ====================
+
+# from django.core.mail import EmailMultiAlternatives
+# from django.template.loader import render_to_string
+# from django.utils.html import strip_tags
+
+# def register_view(request):
+#     form = StudentRegistrationForm()
+
+#     if request.method == 'POST':
+#         form = StudentRegistrationForm(request.POST)
+
+#         if form.is_valid():
+#             student = form.save()
+
+#             course_title = student.course.title if student.course else "Not Selected"
+#             program_specific = student.program_name if student.program_name else "N/A"
+
+#             subject = f"New Registration: {student.first_name} {student.last_name}"
+
+#             # HTML Email Content
+#             html_message = f"""
+#             <!DOCTYPE html>
+#             <html>
+#             <head>
+#                 <meta charset="UTF-8">
+#             </head>
+#             <body style="margin:0; padding:0; background-color:#f4f4f4; font-family: Arial, sans-serif;">
+#                 <table width="100%" cellpadding="0" cellspacing="0" style="padding: 40px 20px;">
+#                     <tr>
+#                         <td align="center">
+#                             <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; border-radius:8px; overflow:hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                
+#                                 <!-- Header -->
+#                                 <tr>
+#                                     <td style="background: #2D4636; padding: 30px; text-align: center;">
+#                                         <h1 style="margin:0; color:#ffffff; font-size:22px; font-weight:600;">
+#                                             New Student Registration
+#                                         </h1>
+#                                     </td>
+#                                 </tr>
+                                
+#                                 <!-- Body -->
+#                                 <tr>
+#                                     <td style="padding: 35px 40px;">
+#                                         <p style="margin:0 0 25px; color:#555; font-size:15px; line-height:1.6;">
+#                                             A new student has registered on the website. Here are the details:
+#                                         </p>
+                                        
+#                                         <!-- Data Table -->
+#                                         <table width="100%" cellpadding="0" cellspacing="0" style="border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden;">
+#                                             <tr style="background: #f8f9fa;">
+#                                                 <td style="padding: 14px 20px; font-weight: 600; color: #2D4636; border-bottom: 1px solid #e0e0e0; width: 40%;">Full Name</td>
+#                                                 <td style="padding: 14px 20px; color: #333; border-bottom: 1px solid #e0e0e0;">{student.first_name} {student.last_name}</td>
+#                                             </tr>
+#                                             <tr>
+#                                                 <td style="padding: 14px 20px; font-weight: 600; color: #2D4636; border-bottom: 1px solid #e0e0e0;">Date of Birth</td>
+#                                                 <td style="padding: 14px 20px; color: #333; border-bottom: 1px solid #e0e0e0;">{student.dob}</td>
+#                                             </tr>
+#                                             <tr style="background: #f8f9fa;">
+#                                                 <td style="padding: 14px 20px; font-weight: 600; color: #2D4636; border-bottom: 1px solid #e0e0e0;">Email</td>
+#                                                 <td style="padding: 14px 20px; color: #333; border-bottom: 1px solid #e0e0e0;">{student.email}</td>
+#                                             </tr>
+#                                             <tr>
+#                                                 <td style="padding: 14px 20px; font-weight: 600; color: #2D4636; border-bottom: 1px solid #e0e0e0;">Mobile</td>
+#                                                 <td style="padding: 14px 20px; color: #333; border-bottom: 1px solid #e0e0e0;">{student.mobile}</td>
+#                                             </tr>
+#                                             <tr style="background: #f8f9fa;">
+#                                                 <td style="padding: 14px 20px; font-weight: 600; color: #2D4636; border-bottom: 1px solid #e0e0e0;">Course</td>
+#                                                 <td style="padding: 14px 20px; color: #333; border-bottom: 1px solid #e0e0e0;">{course_title}</td>
+#                                             </tr>
+#                                             <tr>
+#                                                 <td style="padding: 14px 20px; font-weight: 600; color: #2D4636;">Program</td>
+#                                                 <td style="padding: 14px 20px; color: #333;">{program_specific}</td>
+#                                             </tr>
+#                                         </table>
+#                                     </td>
+#                                 </tr>
+                                
+#                                 <!-- Footer -->
+#                                 <tr>
+#                                     <td style="background: #f8f9fa; padding: 20px 40px; text-align: center; border-top: 1px solid #e0e0e0;">
+#                                         <p style="margin:0; color:#888; font-size:13px;">
+#                                             Darul Fatheh Islamic Complex
+#                                         </p>
+#                                     </td>
+#                                 </tr>
+                                
+#                             </table>
+#                         </td>
+#                     </tr>
+#                 </table>
+#             </body>
+#             </html>
+#             """
+
+#             plain_message = strip_tags(html_message)
+
+#             try:
+#                 email = EmailMultiAlternatives(
+#                     subject,
+#                     plain_message,
+#                     settings.DEFAULT_FROM_EMAIL,
+#                     [settings.EMAIL_HOST_USER],
+#                 )
+#                 email.attach_alternative(html_message, "text/html")
+#                 email.send(fail_silently=False)
+#                 print("Email sent successfully")
+#             except Exception as e:
+#                 print("Email failed:", e)
+
+#             messages.success(
+#                 request,
+#                 "Registration successful! We have received your details."
+#             )
+#             return redirect('admin_panel:register')
+
+#         else:
+#             messages.error(request, "Please correct the errors below.")
+
+#     return render(request, 'register.html', {'form': form})

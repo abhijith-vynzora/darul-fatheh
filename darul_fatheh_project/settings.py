@@ -78,24 +78,28 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Email Configuration
+# Email Configuration- deployed version using Gmail SMTP
 
-# 1. Force the backend
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-# 2. Hardcode Gmail defaults (These never change, so they are safe here)
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_USE_TLS = True  # <--- WE FORCE THIS TO BE A REAL BOOLEAN TRUE
+EMAIL_USE_TLS = True  
 EMAIL_USE_SSL = False
-
-# 3. Pull ONLY credentials from Render Environment
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-
-# 4. Set default senders
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
+
+#email sending for local development
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'theofaber26@gmail.com'
+# EMAIL_HOST_PASSWORD = 'eueq gglr adbm uzsy'
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# SERVER_EMAIL = EMAIL_HOST_USER
+
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'

@@ -36,7 +36,6 @@ class ManagementTeam(models.Model):
 class Course(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
-    short_description = models.TextField(blank=True, help_text="Short summary for the course card (approx. 1-2 sentences).")
     description = models.TextField(verbose_name="Detailed Description")
     duration = models.CharField(max_length=100)
     instructor = models.CharField(max_length=200,blank=True)
