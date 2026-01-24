@@ -826,7 +826,6 @@ def donate(request):
 
 
 
-
 def register_view(request):
     form = StudentRegistrationForm()
 
@@ -836,7 +835,78 @@ def register_view(request):
         if form.is_valid():
             student = form.save()
 
-            url = "https://api.brevo.com/v3/smtp/email"
+            course_title = student.course.title if student.course else "Not Selected"
+            program_specific = student.program_name if student.program_name else "N/A"
+
+            html_message = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body style="margin:0; padding:0; background-color:#f4f4f4; font-family: Arial, sans-serif;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding: 40px 20px;">
+        <tr>
+            <td align="center">
+                <table width="600" cellpadding="0" cellspacing="0"
+                       style="background:#ffffff; border-radius:8px; overflow:hidden;
+                              box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+
+                    <tr>
+                        <td style="background: #2D4636; padding: 30px; text-align: center;">
+                            <h1 style="margin:0; color:#ffffff; font-size:22px;">
+                                New Student Registration
+                            </h1>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 35px 40px;">
+                            <p style="color:#555; font-size:15px;">
+                                A new student has registered on the website.
+                            </p>
+
+                            <table width="100%" cellpadding="0" cellspacing="0"
+                                   style="border:1px solid #e0e0e0; border-radius:6px;">
+                                <tr>
+                                    <td style="padding:12px; font-weight:bold;">Full Name</td>
+                                    <td style="padding:12px;">{student.first_name} {student.last_name}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:12px; font-weight:bold;">Email</td>
+                                    <td style="padding:12px;">{student.email}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:12px; font-weight:bold;">Mobile</td>
+                                    <td style="padding:12px;">{student.mobile}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:12px; font-weight:bold;">Course</td>
+                                    <td style="padding:12px;">{course_title}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:12px; font-weight:bold;">Program</td>
+                                    <td style="padding:12px;">{program_specific}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="background:#f8f9fa; padding:20px; text-align:center;">
+                            <p style="margin:0; font-size:13px; color:#888;">
+                                Darul Fatheh Islamic Complex
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+"""
 
             payload = {
                 "sender": {
@@ -849,40 +919,34 @@ def register_view(request):
                         "name": "Admin"
                     }
                 ],
+                "replyTo": {
+                    "email": student.email,
+                    "name": f"{student.first_name} {student.last_name}"
+                },
                 "subject": "New Student Registration",
-                "htmlContent": f"""
-                    <p>Dear Admin,</p>
-                    <p>A new student has registered.</p>
-                    <p>
-                        <strong>Name:</strong> {student.first_name} {student.last_name}<br>
-                        <strong>Email:</strong> {student.email}<br>
-                        <strong>Mobile:</strong> {student.mobile}
-                    </p>
-                    <p>Regards,<br>Darul Fatheh</p>
-                """
+                "htmlContent": html_message
             }
 
             headers = {
                 "accept": "application/json",
-                "api-key": os.environ.get("BREVO_API_KEY"),
-                "content-type": "application/json"
+                "content-type": "application/json",
+                "api-key": os.environ.get("BREVO_API_KEY")
             }
 
-            response = requests.post(url, json=payload, headers=headers)
+            response = requests.post(
+                "https://api.brevo.com/v3/smtp/email",
+                json=payload,
+                headers=headers
+            )
 
             if response.status_code not in (200, 201):
                 print("Brevo error:", response.text)
 
-            messages.success(
-                request,
-                "Registration successful! We have received your details."
-            )
+            messages.success(request, "Registration successful!")
             return redirect('admin_panel:register')
 
-        else:
-            messages.error(request, "Please correct the errors below.")
-
     return render(request, 'register.html', {'form': form})
+
 
 # # ==================== STUDENT REGISTRATION VIEWS FOR LOCAL HOSTING ====================
 # def register_view(request):
