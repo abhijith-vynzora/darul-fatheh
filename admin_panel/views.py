@@ -9,7 +9,7 @@ from django.utils.text import slugify
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import StudentRegistrationForm
-import threading 
+# import threading 
 
 from .models import (
     ManagementTeam, Course, News, Category,
@@ -712,34 +712,80 @@ def donate(request):
 
 # ==================== PUBLIC REGISTRATION VIEW ====================
 
-def send_email_in_thread(subject, message, recipient_list):
-    try:
-        print("Attempting to send email...") 
-        send_mail(
-            subject,
-            message,
-            settings.EMAIL_HOST_USER,
-            recipient_list,
-            fail_silently=False,
-        )
-        print("Email sent successfully!") 
-    except Exception as e:
-        print(f"Error sending email: {e}")
+# def send_email_in_thread(subject, message, recipient_list):
+#     try:
+#         print("Attempting to send email...") 
+#         send_mail(
+#             subject,
+#             message,
+#             settings.EMAIL_HOST_USER,
+#             recipient_list,
+#             fail_silently=False,
+#         )
+#         print("Email sent successfully!") 
+#     except Exception as e:
+#         print(f"Error sending email: {e}")
+
+# def register_view(request):
+#     form = StudentRegistrationForm()
+    
+#     if request.method == 'POST':
+#         form = StudentRegistrationForm(request.POST)
+        
+#         if form.is_valid():
+#             student = form.save()
+            
+#             course_title = student.course.title if student.course else "Not Selected"
+#             program_specific = student.program_name if student.program_name else "N/A"
+            
+#             subject = f"New Student Registration: {student.first_name} {student.last_name}"
+            
+#             message = (
+#                 f"A new student has registered via the website.\n\n"
+#                 f"--------------------------------------------\n"
+#                 f"FULL NAME: {student.first_name} {student.last_name}\n"
+#                 f"DOB:       {student.dob}\n"
+#                 f"EMAIL:     {student.email}\n"
+#                 f"MOBILE:    {student.mobile}\n"
+#                 f"--------------------------------------------\n"
+#                 f"COURSE:     {course_title}\n"
+#                 f"SPECIFIC PROGRAM: {program_specific}\n"
+#                 f"--------------------------------------------\n\n"
+#                 f"Please verify this entry in the Admin Panel."
+#             )
+            
+#             recipient_list = [settings.EMAIL_HOST_USER]  
+            
+#             email_thread = threading.Thread(
+#                 target=send_email_in_thread, 
+#                 args=(subject, message, recipient_list)
+#             )
+#             email_thread.start()
+
+#             messages.success(request, 'Registration successful! We have received your details.')
+#             return redirect('admin_panel:register')
+            
+#         else:
+#             messages.error(request, 'Please correct the errors in the form below.')
+            
+#     return render(request, 'register.html', {'form': form})
+
+
 
 def register_view(request):
     form = StudentRegistrationForm()
-    
+
     if request.method == 'POST':
         form = StudentRegistrationForm(request.POST)
-        
+
         if form.is_valid():
             student = form.save()
-            
+
             course_title = student.course.title if student.course else "Not Selected"
             program_specific = student.program_name if student.program_name else "N/A"
-            
+
             subject = f"New Student Registration: {student.first_name} {student.last_name}"
-            
+
             message = (
                 f"A new student has registered via the website.\n\n"
                 f"--------------------------------------------\n"
@@ -753,21 +799,27 @@ def register_view(request):
                 f"--------------------------------------------\n\n"
                 f"Please verify this entry in the Admin Panel."
             )
-            
-            recipient_list = [settings.EMAIL_HOST_USER]  
-            
-            email_thread = threading.Thread(
-                target=send_email_in_thread, 
-                args=(subject, message, recipient_list)
-            )
-            email_thread.start()
 
-            messages.success(request, 'Registration successful! We have received your details.')
+            try:
+                send_mail(
+                    subject,
+                    message,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [settings.DEFAULT_FROM_EMAIL],
+                    fail_silently=False,
+                )
+            except Exception as e:
+                print("Email error:", e)
+
+            messages.success(
+                request,
+                "Registration successful! We have received your details."
+            )
             return redirect('admin_panel:register')
-            
+
         else:
-            messages.error(request, 'Please correct the errors in the form below.')
-            
+            messages.error(request, "Please correct the errors below.")
+
     return render(request, 'register.html', {'form': form})
 
 
@@ -821,7 +873,7 @@ def register_view(request):
 
 
 
-# ==================== STUDENT REGISTRATION VIEWS ====================
+# ==================== STUDENT REGISTRATION VIEWS (admin dashboard)====================
 @login_required(login_url='admin_panel:login')
 def student_list(request):
     student_list = StudentRegistration.objects.all().order_by('-registered_at')
