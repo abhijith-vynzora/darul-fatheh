@@ -339,7 +339,8 @@
         padding: 45px 50px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start; /* ✅ align content to top */
+        align-items: flex-start;
         flex: 1;
         min-width: 0;
     }
@@ -460,6 +461,20 @@
         }
         .event-description {
             -webkit-line-clamp: 5;
+        }
+    }
+
+    /* New: Events grid layout (carousel removed for events) */
+    .events-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin: 0 -10px; /* keep spacing similar to previous .events-slick layout */
+    }
+
+    @media (max-width: 991px) {
+        .events-grid {
+            grid-template-columns: 1fr;
         }
     }
 
@@ -864,7 +879,7 @@
 
             <div class="events-carousel-wrapper">
                 {% if events %}
-                <div class="events-slick">
+                <div class="events-grid">
                     {% for event in events %}
                     <div class="event-slide">
                         <div class="event-card">
@@ -969,38 +984,7 @@
 <script>
 $(document).ready(function(){
     
-    // Events Carousel - 2 cards at a time
-    $('.events-slick').slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 5000,
-        speed: 600,
-        pauseOnHover: true,
-        cssEase: 'ease-in-out',
-        arrows: true,
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 2,
-                    arrows: true
-                }
-            },
-            {
-                breakpoint: 991,
-                settings: {
-                    slidesToShow: 1,
-                    arrows: false,
-                    dots: true
-                }
-            }
-        ]
-    });
-
-    // Alumni Carousel - 2 cards at a time
+    // Alumni Carousel - 2 cards at a time (kept as-is)
     $('.alumni-modern-slick').slick({
         dots: true,
         infinite: true,
