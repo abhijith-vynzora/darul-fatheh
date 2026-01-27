@@ -51,7 +51,8 @@
         width: auto;
         display: block;
         transition: all 0.3s ease;
-        margin-bottom: 20px;
+        {% comment %} margin-bottom: 20px; {% endcomment %}
+        
     }
     
     @media (max-width: 768px) {
@@ -324,20 +325,20 @@
                         
                         <div class="logo-box">
                             <div class="logo">
-                                <a href="{% url 'admin_panel:index' %}" style="display: flex; align-items: center; text-decoration: none;">
-                                    <img src="{% static 'assets/images/logo.png' %}" alt="Darul Fatheh" class="main-logo" style="margin-right: 15px;">
-                                    <div style="display: flex; flex-direction: column; line-height: 0.9; align-items: flex-start;">
-                                        <span style="font-family: 'Tensor Sans', sans-serif; font-size: 28px; font-weight: 900; text-transform: uppercase; color: #2D4636; letter-spacing: -1.2px; display: inline-block; line-height: 1;">
+                                <a href="{% url 'admin_panel:index' %}" style="display: flex; flex-direction: column; align-items: center; text-decoration: none; gap: 2px; margin-left: 20px; margin-bottom: 20px;">
+                                    <img src="{% static 'assets/images/logo.png' %}" alt="Darul Fatheh" class="main-logo" style="max-height: 70px;">
+                                    <div style="display: flex; flex-direction: column; align-items: center; gap: 0;">
+                                        <span style="font-family: 'Cinzel', sans-serif; font-size: 20px; font-weight: 800; color: #2D4636; letter-spacing: 0.5px; text-transform: uppercase; line-height: 1;">
                                             DARUL FATHEH
                                         </span>
-                                        <span style="font-family: 'Public Sans', sans-serif; font-size: 14px; font-weight: 800; text-transform: uppercase; color: var(--color-two); letter-spacing: 0.5px; margin-top: 2px; margin-left: 1px;">
+                                        <span style="font-family: 'Public Sans', sans-serif; font-size: 9px; font-weight: 500; text-transform: uppercase; color: var(--color-two); letter-spacing: 2.5px; line-height: 1;">
                                             Islamic Complex
                                         </span>
                                     </div>
                                 </a>
                             </div>
                         </div>
-                        
+
                         <div class="nav-outer">
                             <nav class="main-menu navbar-expand-md">
                                 <div class="navbar-header">
