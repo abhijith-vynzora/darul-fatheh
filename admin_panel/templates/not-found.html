@@ -3,33 +3,221 @@
 
 {% block title %}Darul Fateh | Page Not Found{% endblock %}
 
+{% block extra_css %}
+<style>
+    /* 1. Hide Global Layout Elements */
+    .header-top, 
+    .main-header, 
+    .main-footer,
+    .mobile-menu {
+        display: none !important;
+    }
+
+    /* 2. Reset Page Wrapper for Fullscreen View */
+    .page-wrapper {
+        padding-top: 0 !important;
+    }
+
+    /* 404 Page Styles */
+    .error-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        position: relative;
+        overflow: hidden;
+        padding: 40px 20px;
+    }
+
+    .error-section::before {
+        content: '404';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 35vw;
+        font-weight: 900;
+        font-family: 'Inter', sans-serif;
+        color: rgba(45, 70, 54, 0.03);
+        pointer-events: none;
+        line-height: 1;
+    }
+
+    .error-content {
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        max-width: 600px;
+    }
+
+    .error-icon {
+        width: 150px;
+        height: 150px;
+        background: linear-gradient(135deg, #2D4636 0%, #1a3a2a 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 40px;
+        box-shadow: 0 20px 60px rgba(45, 70, 54, 0.3);
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .error-icon i {
+        font-size: 4rem;
+        color: #fff;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+
+    .error-code {
+        font-family: 'Inter', sans-serif;
+        font-size: 8rem;
+        font-weight: 900;
+        color: #2D4636;
+        line-height: 1;
+        margin-bottom: 20px;
+        letter-spacing: -5px;
+    }
+
+    .error-code span {
+        color: var(--color-two);
+    }
+
+    .error-title {
+        font-family: 'Inter', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .error-text {
+        font-family: 'Public Sans', sans-serif;
+        font-size: 1.1rem;
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 40px;
+    }
+
+    .error-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .error-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 16px 35px;
+        border-radius: 50px;
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .error-btn-primary {
+        background: #2D4636;
+        color: #fff !important;
+    }
+
+    .error-btn-primary:hover {
+        background: #C19A5B;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .error-btn-outline {
+        background: transparent;
+        color: #2D4636;
+        border: 2px solid #2D4636;
+    }
+
+    .error-btn-outline:hover {
+        background: #2D4636;
+        color: #fff !important;
+        transform: translateY(-3px);
+    }
+
+    .error-decoration {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.5;
+    }
+
+    .error-decoration-1 {
+        width: 300px;
+        height: 300px;
+        background: linear-gradient(135deg, #C19A5B 0%, transparent 70%);
+        top: -100px;
+        right: -100px;
+    }
+
+    .error-decoration-2 {
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(135deg, #2D4636 0%, transparent 70%);
+        bottom: -50px;
+        left: -50px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .error-code {
+            font-size: 5rem;
+            letter-spacing: -3px;
+        }
+        .error-title {
+            font-size: 1.8rem;
+        }
+        .error-text {
+            font-size: 1rem;
+        }
+        .error-icon {
+            width: 120px;
+            height: 120px;
+        }
+        .error-icon i {
+            font-size: 3rem;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-
-    <section class="page-title" style="background-image:url({% static 'assets/images/background/page-title.jpg' %})">
-        <div class="auto-container">
-            <h2>Not Found</h2>
-            <ul class="bread-crumb clearfix">
-                <li><a href="{% url 'admin_panel:index' %}">Home</a></li>
-                <li>Not Found</li>
-            </ul>
+<section class="error-section">
+    <div class="error-decoration error-decoration-1"></div>
+    <div class="error-decoration error-decoration-2"></div>
+    
+    <div class="error-content">
+        <div class="error-icon">
+            <i class="fa-solid fa-mosque"></i>
         </div>
-    </section>
-
-    <section class="error-one" style="background-image:url({% static 'assets/images/icons/stars.png' %})">
-        <div class="error-one_icon" style="background-image:url({% static 'assets/images/icons/moon.png' %})"></div>
-        <div class="auto-container">
-            <h1>4<span>0</span>4</h1>
-            <h3>Opps! You're in the wrong place.</h3>
-            <div class="error-one_text">We Can’t Seem to Find the Page You are Looking for</div>
-            <div class="error-one_button">
-                <a href="{% url 'admin_panel:index' %}" class="theme-btn btn-style-four">
-                    <span class="btn-wrap">
-                        <span class="text-one">back to home</span>
-                        <span class="text-two">back to home</span>
-                    </span>
-                </a>
-            </div>
+        
+        <div class="error-code">4<span>0</span>4</div>
+        
+        <h1 class="error-title">Oops! Page Not Found</h1>
+        
+        <p class="error-text">
+            We can’t seem to find the page you are looking for. Let’s get you back on track.
+        </p>
+        
+        <div class="error-buttons">
+            <a href="{% url 'admin_panel:index' %}" class="error-btn error-btn-primary">
+                <i class="fa-solid fa-house"></i> Back to Home
+            </a>
+            <a href="{% url 'admin_panel:contact' %}" class="error-btn error-btn-outline">
+                <i class="fa-solid fa-envelope"></i> Contact Us
+            </a>
         </div>
-    </section>
-
+    </div>
+</section>
 {% endblock %}
