@@ -210,8 +210,8 @@
     
     .footer-widget.logo-widget .logo a {
         justify-content: center !important;
-        margin: 0 !important;
-        padding: 0 !important;
+        margin-right: 20px
+
     }
     
     .footer-widget.logo-widget .logo a span {
@@ -247,7 +247,7 @@
         max-width: 50% !important;
         text-align: center !important;
         padding-left: 20px !important;
-        padding-right: 20px !important;
+        padding-right: 25px !important;
         order: 3 !important;
     }
     
@@ -284,7 +284,7 @@
     /* Add right margin to social icons in mobile view only */
 @media (max-width: 991px) {
     .footer-widget.logo-widget .footer_socials {
-        margin-right: 40px !important;
+        margin-right: 35px !important;
     }
 }
 
@@ -327,6 +327,25 @@
     .logo-box .logo > a > div span:last-child {
         font-size: 6px !important;
         letter-spacing: 1.5px !important;
+    }
+}
+@media (max-width: 991px) {
+    .footer-widget.logo-widget .logo a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .footer-widget.logo-widget .logo a span {
+        padding-bottom: 0 !important;
+        border-bottom: none !important;
+        display: flex;
+        align-items: center;
+    }
+}
+@media (max-width: 991px) {
+    .footer-widget.logo-widget .logo a img {
+        margin-bottom: 12px;
     }
 }
 </style>
@@ -467,14 +486,15 @@
                             <div class="footer-widget logo-widget">
                                 <div class="logo">
                                     <a href="{% url 'admin_panel:index' %}" style="display: flex; align-items: center; justify-content: center; text-decoration: none;">
-                                        <img src="{% static 'assets/images/logo.png' %}" alt="Darul Fatheh" style="max-height: 60px; width: auto; margin-right: 15px;">
+                                        <img src="{% static 'assets/images/logo.png' %}" alt="Darul Fatheh" style="max-height: 60px; width: auto; margin-right: 10px;margin-bottom: 5px;">
                                         <span style="font-family: 'Lexend', sans-serif; font-size: 30px; font-weight: 800; color: white; letter-spacing: -0.5px; border-bottom: 3px solid var(--color-two); padding-bottom: 5px; line-height: 1;">Darul Fatheh </span>
                                     </a>
                                 </div>
                                 <ul class="footer_list">
                                     <li>Kunnam, Muthalakodam P.O.,<br>Thodupuzha, Idukki, Kerala</li>
-                                    <li>Phone: <a href="tel:+918848078986">+91 8848 078 986</a></li>
-                                    <li>Phone: <a href="tel:+919495526282">+91 9495 526 282</a></li>
+                                    <li style="Color:var(--color-two);">Contact Info</li>
+                                    <li><a href="tel:+918848078986">+91 8848 078 986</a></li>
+                                    <li><a href="tel:+919495526282">+91 9495 526 282</a></li>
                                 </ul>
                                 <div class="footer_socials">
                                     <a href="#"><i class="fa-brands fa-facebook-f"></i></a>

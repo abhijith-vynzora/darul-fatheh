@@ -49,7 +49,9 @@
     overflow: hidden !important;
     border-radius: 50% !important;
 }
-    
+
+
+
 </style>
 
     <section class="slider-one">
@@ -618,6 +620,44 @@
         </div>
     </section>
 
+    <section class="news-one">
+        <div class="auto-container">
+            <div class="sec-title centered">
+                <div class="sec-title_title">OUR NEWS UPDATES</div>
+                <h2 class="sec-title_heading">Latest News & Articles From <br> The Blog</h2>
+            </div>
+            <div class="row clearfix">
+                {% for item in news %}
+                <div class="news-block_one col-lg-4 col-md-6 col-sm-12">
+                    <div class="news-block_one-inner wow fadeInLeft" data-wow-delay="150ms" data-wow-duration="1500ms">
+                        <div class="news-block_one-image">
+                            <a href="{% url 'admin_panel:news_detail' item.slug %}">
+                                {% if item.image %}
+                                    <img src="{{ item.image.url }}" alt="" style="height: 250px; object-fit: cover;"/>
+                                {% else %}
+                                    <img src="{% static 'assets/images/resource/news-1.jpg' %}" alt="" />
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="news-block_one-content">
+                            <ul class="news-block_one-meta">
+                                <li><span class="icon fa-solid fa-clock fa-fw"></span>{{ item.published_date|date:"F d, Y" }}</li>
+                            </ul>
+                            <h5 class="news-block_one-heading"><a href="{% url 'admin_panel:news_detail' item.slug %}">{{ item.title }}</a></h5>
+                            <div class="news-block_one-text">{{ item.content|truncatewords:15|striptags }}</div>
+                            <div class="news-block_one-info d-flex justify-content-between align-items-center flex-wrap">
+                                <a class="news-block_one-more theme-btn" href="{% url 'admin_panel:news_detail' item.slug %}">read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12 text-center"><p>No news updates found.</p></div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
     <section class="testimonial-one" style="background-image:url({% static 'assets/images/background/testimonial-one_bg.png' %})">
         <div class="auto-container">
             <div class="row clearfix">
@@ -675,7 +715,7 @@
 {% comment "FAQ" %}FAQ section instead of gallary{% endcomment %}
 <section class="faq-one">
     <div class="auto-container">
-        <h3>Find answers to the most frequently <br> asked questions below</h3>
+        <h3> Most frequently <br> asked questions and their Answers</h3>
         <div class="row clearfix">
             
             <div class="faq-one_accordian-column col-lg-8 col-md-12 col-sm-12">
@@ -777,21 +817,20 @@
                     
                     <div class="sidebar-widget helpline-widget">
                         <div class="widget-content">
-                            <div class="image">
-                                <img src="{% static 'assets/images/icons/helpline-widget.png' %}" alt="" />
-                            </div>
+                          
                             <h4 class="helpline-title">
-                                 Feel free to contact our helpline
+                                 Feel free to contact
                             </h4>
-                            <div class="helpline-widget_phone flaticon-phone-call"></div>
                             <div class="helpline-widget_number">
-                                Helpline: +91 8848 078 986 <span>(10 AM – 5 PM)</span>
+                                Phone: +91 8848 078 986 <span>(10 AM – 5 PM)</span>
                             </div>
+                            <div class="helpline-widget_phone flaticon-phone-call"></div>
                         </div>
                     </div>
 
                 </div>
             </div>
+
 
         </div>
     </div>
@@ -835,43 +874,7 @@
         </div>
     </section> {% endcomment %}
 
-    <section class="news-one">
-        <div class="auto-container">
-            <div class="sec-title centered">
-                <div class="sec-title_title">OUR NEWS UPDATES</div>
-                <h2 class="sec-title_heading">Latest News & Articles From <br> The Blog</h2>
-            </div>
-            <div class="row clearfix">
-                {% for item in news %}
-                <div class="news-block_one col-lg-4 col-md-6 col-sm-12">
-                    <div class="news-block_one-inner wow fadeInLeft" data-wow-delay="150ms" data-wow-duration="1500ms">
-                        <div class="news-block_one-image">
-                            <a href="{% url 'admin_panel:news_detail' item.slug %}">
-                                {% if item.image %}
-                                    <img src="{{ item.image.url }}" alt="" style="height: 250px; object-fit: cover;"/>
-                                {% else %}
-                                    <img src="{% static 'assets/images/resource/news-1.jpg' %}" alt="" />
-                                {% endif %}
-                            </a>
-                        </div>
-                        <div class="news-block_one-content">
-                            <ul class="news-block_one-meta">
-                                <li><span class="icon fa-solid fa-clock fa-fw"></span>{{ item.published_date|date:"F d, Y" }}</li>
-                            </ul>
-                            <h5 class="news-block_one-heading"><a href="{% url 'admin_panel:news_detail' item.slug %}">{{ item.title }}</a></h5>
-                            <div class="news-block_one-text">{{ item.content|truncatewords:15|striptags }}</div>
-                            <div class="news-block_one-info d-flex justify-content-between align-items-center flex-wrap">
-                                <a class="news-block_one-more theme-btn" href="{% url 'admin_panel:news_detail' item.slug %}">read more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% empty %}
-                <div class="col-12 text-center"><p>No news updates found.</p></div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
+    
 
     <section class="cta-two">
         <div class="auto-container">

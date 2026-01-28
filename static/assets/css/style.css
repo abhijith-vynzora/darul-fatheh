@@ -4770,7 +4770,7 @@
 }
 
 /* Helpline Widget */
-
+/* 
 .helpline-widget .widget-content{
 	position: relative;
 	text-align: center;
@@ -4785,9 +4785,7 @@
     right: 0px;
     bottom: 0px;
     border-radius: 5px;
-    /* CHANGED: Fallback to Navy Blue */
     background: var(--main-color);
-    /* CHANGED: Replaced Green/Yellow with Navy/Red Gradient */
     background: linear-gradient(to bottom, var(--main-color) 0%, var(--color-two) 100%);
 }
 
@@ -4834,8 +4832,72 @@
 	display: block;
 	color: white;
 	margin-top: var(--margin-top-10);
+} */
+
+
+/* Helpline widget styling */
+.helpline-widget .widget-content {
+    position: relative;
+    text-align: center;
+    padding: 50px 40px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+.helpline-widget .widget-content::before {
+    position: absolute;
+    content: '';
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    border-radius: 5px;
+    background: var(--main-color);
+    background: linear-gradient(to bottom, var(--main-color) 0%, var(--color-two) 100%);
+}
+
+.helpline-widget .helpline-title {
+    position: relative;
+    font-weight: 400;
+    color: var(--white-color);
+    font-size: 26px;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.helpline-widget .helpline-widget_phone {
+    position: relative;
+    width: 85px;
+    height: 85px;
+    line-height: 85px;
+    border-radius: 50px;
+    text-align: center;
+    margin: 30px auto 0;
+    font-size: var(--font-40);
+    color: white;
+    background-color: var(--color-fourtyfour);
+    font-family: "flaticon_afbd3404a2e1104832d0";
+}
+
+.helpline-widget .helpline-widget_number {
+    position: relative;
+    font-weight: 500;
+    color: white;
+    font-size: 20px;
+    margin-top: 30px;
+}
+
+.helpline-widget .helpline-widget_number span {
+    position: relative;
+    display: block;
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+    opacity: 0.9;
+}
 /*** 
 
 ====================================================================
@@ -6981,7 +7043,16 @@
 
 .faq-one_helpline-column{
 	position: relative;
-	margin-bottom: var(--margin-bottom-30);
+	margin-bottom: 0;
+}
+/* Center helpline card with FAQ */
+.faq-one .row.clearfix {
+    display: flex;
+    align-items: center;
+}
+
+.faq-one_helpline-column {
+    margin-bottom: 0;
 }
 
 /*** 
