@@ -11,12 +11,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-dev')
 
 
-if 'RENDER' in os.environ:
-    DEBUG = False
-else:
-    DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [
+    '13.233.201.151',
+    'localhost',
+    '127.0.0.1'
+]
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
