@@ -412,40 +412,55 @@
         }
     </style>
 
-    <section class="courses-one" style="background-image:url({% static 'assets/images/background/courses-one_bg.png' %})">
+    <<section class="courses-one" style="background-image:url({% static 'assets/images/background/courses-one_bg.png' %})">
         <div class="auto-container">
             <div class="sec-title centered">
                 <div class="sec-title_title">Popular Courses</div>
                 <h2 class="sec-title_heading">Our Arabic & Islamic Courses</h2>
             </div>
-            
+    
             <div class="courses-carousel swiper-container">
                 <div class="swiper-wrapper">
-                    
+    
                     {% for course in courses %}
                     <div class="swiper-slide">
                         <div class="course-block_one">
                             <div class="course-block_one-inner">
-                                <div class="course-block_one-image">
-                                    <a href="{% url 'admin_panel:course_detail' course.slug %}">
+    
+                                <!-- IMAGE -->
+                                <div class="course-block_one-image" style="width:100%; height:240px; overflow:hidden; line-height:0;">
+                                    <a href="{% url 'admin_panel:course_detail' course.slug %}"
+                                       style="display:block; width:100%; height:100%;">
                                         {% if course.thumbnail %}
-                                            <img src="{{ course.thumbnail.url }}" alt="{{ course.title }}" style="height: 240px; width: 100%; object-fit: cover;">
+                                            <img
+                                                src="{{ course.thumbnail.url }}"
+                                                alt="{{ course.title }}"
+                                                style="width:100%; height:100%; object-fit:cover; display:block;">
                                         {% else %}
-                                            <img src="{% static 'assets/images/resource/course-1.jpg' %}" alt="" />
+                                            <img
+                                                src="{% static 'assets/images/resource/course-1.jpg' %}"
+                                                alt=""
+                                                style="width:100%; height:100%; object-fit:cover; display:block;">
                                         {% endif %}
                                     </a>
                                 </div>
+    
+                                <!-- CONTENT -->
                                 <div class="course-block_one-content">
                                     <div class="course-block_one-icon">
                                         <img src="{% static 'assets/images/icons/' %}" alt="" />
                                     </div>
-                                    <h4 class="course-block_one-heading"><a href="{% url 'admin_panel:course_detail' course.slug %}">{{ course.title }}</a></h4>
-                                    
+    
+                                    <h4 class="course-block_one-heading">
+                                        <a href="{% url 'admin_panel:course_detail' course.slug %}">
+                                            {{ course.title }}
+                                        </a>
+                                    </h4>
+    
                                     <ul class="course-block_one-list d-flex justify-content-between flex-wrap align-items-center">
-                                        {% comment %} <li><span>{{ course.level|title }}</span>Level</li> {% endcomment %}
                                         <li><span>{{ course.duration }}</span></li>
                                     </ul>
-                                    
+    
                                     <div class="course-block_one-text">
                                         {% if course.short_description %}
                                             {{ course.short_description|safe }}
@@ -453,25 +468,31 @@
                                             {{ course.description|striptags|truncatewords:20 }}
                                         {% endif %}
                                     </div>
-                                    
+    
                                     <div class="course-block_one-buttons d-flex justify-content-between flex-wrap">
-                                        <a class="theme-btn course-block_one-study" href="{% url 'admin_panel:course_detail' course.slug %}">Read More</a>
+                                        <a class="theme-btn course-block_one-study"
+                                           href="{% url 'admin_panel:course_detail' course.slug %}">
+                                            Read More
+                                        </a>
                                     </div>
                                 </div>
+    
                             </div>
                         </div>
                     </div>
                     {% empty %}
-                    <div class="swiper-slide text-center"><p>No active courses found.</p></div>
+                    <div class="swiper-slide text-center">
+                        <p>No active courses found.</p>
+                    </div>
                     {% endfor %}
-
+    
                 </div>
-                
+    
                 <div class="swiper-pagination courses-pagination"></div>
             </div>
         </div>
     </section>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
